@@ -1,0 +1,11 @@
+--Centered Nav Bar:
+Roboto - normal - 22px
+
+--Bottom Cards:
+Numbers: Roboto - normal - 35px
+Captions: Roboto - normal - 20px
+
+--Others:
+"personal safety" - lowercase - Berlin Sans FB Regular - 45px
+"Rescue anyone, any time, with any device." - normal - Segoe UI - 50px
+"LOGIN" - uppercase - ROBOTO - 20px

@@ -7,7 +7,7 @@
       <div class="box-header">
         <h2>Log In</h2>
       </div>
-      <div v-if="authError" class="error">Email or password Incorrect. Please try again</div>
+      <div v-if="authError" class="error">{{ authError }}</div>
       <form @submit="onSubmit">
       <label for="email">Email</label>
       <br/>
@@ -38,10 +38,10 @@ export default {
   },
   computed: {
     isAdmin() {
-      return this.$store.getters.isAdmin === 'Admin';
+      return this.$store.getters.user === 'Admin';
     },
     authError() {
-      return this.$store.getters.authStatus === 'error';
+      return this.$store.state.errorMessage;
     },
   },
   methods: {
@@ -57,7 +57,7 @@ export default {
             this.$router.push('/personnel');
           }
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err.data));
     },
   },
 };
@@ -2758,8 +2758,6 @@ p.small {
   animation-name: hinge;
 }
 
-/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
-
 @-webkit-keyframes rollIn {
   from {
     opacity: 0;
@@ -3464,12 +3462,6 @@ p.small {
 .slideOutUp {
   -webkit-animation-name: slideOutUp;
   animation-name: slideOutUp;
-}
-
-/* Animation Delay */
-#logo {
-  -webkit-animation-duration: 1s;
-  -webkit-animation-delay: 2s;
 }
 
 .login-box {

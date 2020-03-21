@@ -11,6 +11,7 @@ export default new Vuex.Store({
     messages: [],
     status: '',
     token: localStorage.getItem('token') || '',
+    errorMessage: null,
   },
   mutations: {
     login_request(state) {
@@ -23,30 +24,35 @@ export default new Vuex.Store({
     login_messages(state, messages) {
       state.messages = messages;
     },
-    login_error(state) {
+    authError(state, message) {
+      state.errorMessage = message;
       state.status = 'error';
     },
     logout(state) {
       state.status = '';
       state.token = '';
       state.messages = [];
+      state.admin = {};
+      state.personnel = {};
     },
   },
   actions: {
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('login_request');
-        axios.post('/api/Account/Login', user)
+        axios.post('https://personalsafety.azurewebsites.net/api/Account/Login', user)
           .then((res) => {
             const token = res.data.result;
             const { messages } = res.data;
             localStorage.setItem('token', token);
+            // eslint-disable-next-line prefer-template
+            axios.defaults.headers.common.Authorization = 'Bearer ' + token;
             commit('login_success', token);
             commit('login_messages', messages);
             resolve(res);
           })
           .catch((err) => {
-            commit('login_error', err);
+            commit('authError', err.response.data.messages[0]);
             localStorage.removeItem('token');
             reject(err);
           });
@@ -56,6 +62,7 @@ export default new Vuex.Store({
       return new Promise((resolve) => {
         commit('logout');
         localStorage.removeItem('token');
+        delete axios.defaults.headers.common.Authorization;
         resolve();
       });
     },
@@ -63,7 +70,8 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: (state) => !!state.token,
     authStatus: (state) => state.status,
-    isAdmin: (state) => state.messages[2],
+    user: (state) => state.messages[2],
+    SOSRequests: (state) => state.personnel.Requests,
   },
   modules: {
     admin: adminModule,

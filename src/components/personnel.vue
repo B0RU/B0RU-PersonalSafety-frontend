@@ -87,7 +87,6 @@ export default {
     acceptRequest(requestId) {
       this.$store.dispatch('personnel/acceptRequest', requestId)
         .then(() => this.getSOSRequests());
-      console.log(requestId);
     },
   },
   computed: {

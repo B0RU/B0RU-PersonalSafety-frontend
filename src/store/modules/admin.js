@@ -35,7 +35,6 @@ export default {
             resolve(res);
           })
           .catch((err) => {
-            console.log(err.response.data);
             commit('reg_error', err.response.data);
             reject(err);
           });

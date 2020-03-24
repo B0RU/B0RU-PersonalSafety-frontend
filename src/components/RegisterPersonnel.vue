@@ -83,8 +83,6 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      // alert(JSON.stringify(this.form));
-      console.log(this.form);
       this.$store.dispatch('admin/register', this.form);
     },
     onReset(evt) {

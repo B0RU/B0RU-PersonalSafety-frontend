@@ -35,7 +35,6 @@ export default {
             resolve(res);
           })
           .catch((err) => {
-            console.log(err.response.data);
             commit('get_error');
             reject(err);
           });
@@ -49,11 +48,9 @@ export default {
             Authorization: 'Bearer ' + localStorage.getItem('token'),
           },
         }).then((res) => {
-          console.log(res.data.messages);
           resolve(res);
         })
           .catch((err) => {
-            console.log(err);
             commit('get_error');
             reject(err);
           });

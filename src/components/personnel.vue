@@ -24,28 +24,6 @@
       v-if="request.requestStateName === 'Pending'"
       @click="acceptRequest(request.requestId)">Accept</div>
     </li>
-    <!-- <li class="requestTable-firstTable_table">
-      <h1 class="requestTable-firstTable_table__header">Lorem ipsum dolor sit amet</h1>
-      <p class="requestTable-firstTable_table__request"><span></span><span></span><span></span></p>
-      <ul class="requestTable-firstTable_table__options">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <div class="requestTable-firstTable_table__getstart">Lorem</div>
-    </li>
-    <li class="requestTable-firstTable_table">
-      <h1 class="requestTable-firstTable_table__header">Lorem ipsum dolor sit amet consectetur</h1>
-      <p class="requestTable-firstTable_table__request"><span></span><span></span><span></span></p>
-      <ul class="requestTable-firstTable_table__options">
-        <li></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <div class="requestTable-firstTable_table__getstart">lorem</div>
-    </li> -->
   </ul>
 </div>
 </template>

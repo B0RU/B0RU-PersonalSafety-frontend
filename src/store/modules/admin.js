@@ -23,7 +23,7 @@ export default {
     register({ commit }, personnel) {
       return new Promise((resolve, reject) => {
         commit('reg_request');
-        axios.post('https://personalsafety.azurewebsites.net/api/Admin/RegisterPersonnel', personnel, {
+        axios.post('https://personalsafety.azurewebsites.net/api/Admin/RegisterAgent', personnel, {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),

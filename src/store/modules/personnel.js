@@ -23,7 +23,7 @@ export default {
     getRequests({ commit }) {
       return new Promise((resolve, reject) => {
         commit('get_request');
-        axios.get('https://personalsafety.azurewebsites.net/api/Personnnel/GetAllAuthorityRequests', {
+        axios.get('https://personalsafety.azurewebsites.net/api/Agent/SOS/GetAllAuthorityRequests', {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -42,7 +42,7 @@ export default {
     },
     acceptRequest({ commit }, requestId) {
       return new Promise((resolve, reject) => {
-        axios.put(`https://personalsafety.azurewebsites.net/api/Personnnel/AcceptSOSRequest?requestId=${requestId}`, {
+        axios.put(`https://personalsafety.azurewebsites.net/api/Agent/SOS/AcceptSOSRequest?requestId=${requestId}`, {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),

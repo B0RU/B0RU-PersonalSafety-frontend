@@ -5,6 +5,7 @@ export default {
   state: {
     Requests: {},
     status: '',
+    rescuers: {},
   },
   mutations: {
     get_request(state) {
@@ -17,6 +18,10 @@ export default {
     get_error(state) {
       state.status = 'error';
     //   state.message = errors;
+    },
+    get_rescuers(state, rescuers) {
+      state.rescuers = rescuers;
+      state.status = 'success';
     },
   },
   actions: {
@@ -40,9 +45,9 @@ export default {
           });
       });
     },
-    acceptRequest({ commit }, requestId) {
+    acceptRequest({ commit }, requestId, rescuerEmail) {
       return new Promise((resolve, reject) => {
-        axios.put(`https://personalsafety.azurewebsites.net/api/Agent/SOS/AcceptSOSRequest?requestId=${requestId}`, {
+        axios.put(`https://personalsafety.azurewebsites.net/api/Agent/SOS/AcceptSOSRequest?requestId=${requestId}&rescuerEmail=${rescuerEmail}`, {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -50,6 +55,26 @@ export default {
         }).then((res) => {
           resolve(res);
         })
+          .catch((err) => {
+            commit('get_error');
+            reject(err);
+          });
+      });
+    },
+    getResquers({ commit }) {
+      return new Promise((resolve, reject) => {
+        commit('get_request');
+        axios.get('https://personalsafety.azurewebsites.net/api/Agent/Rescuer/GetOnlineRescuers', {
+          headers: {
+            // eslint-disable-next-line prefer-template
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+        })
+          .then((res) => {
+            const onlineRescuers = res.data.result;
+            commit('get_rescuers', onlineRescuers);
+            resolve(res);
+          })
           .catch((err) => {
             commit('get_error');
             reject(err);

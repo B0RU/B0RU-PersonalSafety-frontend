@@ -19,12 +19,26 @@
       <div class="requestTable-firstTable_table__getstart">
       <a
       :href="`https://maps.google.com?q=${request.requestLocationLatitude},${request.requestLocationLongitude}`"
-      target="_blank"> View Patient Location </a> </div>
-      <div class="requestTable-firstTable_table__getstart"
+      target="_blank"> View Patient Location </a>
+      </div>
+      <div
+      class="requestTable-firstTable_table__getstart"
       v-if="request.requestStateName === 'Pending'"
-      @click="acceptRequest(request.requestId)">Accept</div>
+      @click="rescuer.requestId = request.requestId"
+      v-b-modal.modal-1>
+      Accept
+      </div>
     </li>
   </ul>
+  <b-modal id="modal-1" title="Choose Agent" @ok="handleOk">
+    <p v-if="Rescuers.length === 0">Sorry, We can't find any online Agent</p>
+    <form @submit.stop.prevent="handleSubmit" v-else>
+    <b-form-select v-model="rescuer.rescuerEmail" class="mb-3">
+      <b-form-select-option v-for="rescuer in Rescuers" :key="rescuer.userId"
+      :value="`${rescuer.userEmail}`">{{rescuer.userEmail}}</b-form-select-option>
+    </b-form-select>
+    </form>
+  </b-modal>
 </div>
 </template>
 <script>
@@ -35,6 +49,11 @@ export default {
   data() {
     return {
       connection: '',
+      rescuer: {
+        requestId: null,
+        rescuerEmail: '',
+      },
+      rescuers: this.$store.state.personnel.rescuers,
     };
   },
   created() {
@@ -61,15 +80,32 @@ export default {
   methods: {
     getSOSRequests() {
       this.$store.dispatch('personnel/getRequests');
+      this.$store.dispatch('personnel/getResquers');
     },
-    acceptRequest(requestId) {
-      this.$store.dispatch('personnel/acceptRequest', requestId)
+    acceptRequest(requestId, rescuerEmail) {
+      this.$store.dispatch('personnel/acceptRequest', requestId, rescuerEmail)
         .then(() => this.getSOSRequests());
+    },
+    handleOk(bvModalEvt) {
+      // Prevent modal from closing
+      bvModalEvt.preventDefault();
+      // Trigger submit handler
+      this.handleSubmit();
+    },
+    handleSubmit() {
+      // eslint-disable-next-line no-console
+      console.log(this.rescuer.requestId);
+      // eslint-disable-next-line no-console
+      console.log(this.rescuer.rescuerEmail);
+      this.acceptRequest(this.rescuer.requestId, this.rescuer.rescuerEmail);
     },
   },
   computed: {
     SOSRequests() {
       return this.$store.getters.SOSRequests;
+    },
+    Rescuers() {
+      return this.$store.state.personnel.rescuers;
     },
   },
 };

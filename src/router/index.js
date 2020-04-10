@@ -5,6 +5,7 @@ import Home from '../components/HomePage.vue';
 import LoginPage from '../components/LoginPage.vue';
 import RegisterPersonnel from '../components/RegisterPersonnel.vue';
 import Personnel from '../components/personnel.vue';
+import RegisterAgent from '../components/RegisterAgent.vue';
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,14 @@ const routes = [
     path: '/personnel',
     name: 'personnel',
     component: Personnel,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: '/personnel/register-agent',
+    name: 'registerAgent',
+    component: RegisterAgent,
     meta: {
       requiresAuth: true,
     },

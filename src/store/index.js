@@ -40,7 +40,7 @@ export default new Vuex.Store({
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('login_request');
-        axios.post('https://personalsafety.azurewebsites.net/api/Account/Login', user)
+        axios.post('http://localhost:5566/api/Account/Login', user)
           .then((res) => {
             const token = res.data.result;
             const { messages } = res.data;

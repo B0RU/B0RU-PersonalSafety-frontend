@@ -12,6 +12,6 @@ module.exports = {
   },
   rules: {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'max-len': ['error', { ignoreTrailingComments: true, code: 150, ignoreComments: true }],
+    'max-len': ['error', { ignoreTrailingComments: true, code: 200, ignoreComments: true }],
   },
 };

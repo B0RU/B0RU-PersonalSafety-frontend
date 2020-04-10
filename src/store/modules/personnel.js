@@ -28,7 +28,7 @@ export default {
     getRequests({ commit }) {
       return new Promise((resolve, reject) => {
         commit('get_request');
-        axios.get('https://personalsafety.azurewebsites.net/api/Agent/SOS/GetAllAuthorityRequests', {
+        axios.get('http://localhost:5566/api/Agent/SOS/GetAllAuthorityRequests', {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -45,9 +45,9 @@ export default {
           });
       });
     },
-    acceptRequest({ commit }, requestId, rescuerEmail) {
+    acceptRequest({ commit }, requestInfo) {
       return new Promise((resolve, reject) => {
-        axios.put(`https://personalsafety.azurewebsites.net/api/Agent/SOS/AcceptSOSRequest?requestId=${requestId}&rescuerEmail=${rescuerEmail}`, {
+        axios.put(`http://localhost:5566/api/Agent/SOS/AcceptSOSRequest?requestId=${requestInfo.requestId}&rescuerEmail=${requestInfo.rescuerEmail}`, {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -64,7 +64,7 @@ export default {
     getResquers({ commit }) {
       return new Promise((resolve, reject) => {
         commit('get_request');
-        axios.get('https://personalsafety.azurewebsites.net/api/Agent/Rescuer/GetOnlineRescuers', {
+        axios.get('http://localhost:5566/api/Agent/Rescuer/GetOnlineRescuers', {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),

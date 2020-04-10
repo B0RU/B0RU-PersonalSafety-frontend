@@ -18,19 +18,19 @@
       </ul>
       <div class="requestTable-firstTable_table__getstart">
       <a
-      :href="`https://maps.google.com?q=${request.requestLocationLatitude},${request.requestLocationLongitude}`"
+      :href="`https://maps.google.com?q=loc:${request.requestLocationLatitude}+${request.requestLocationLongitude}`"
       target="_blank"> View Patient Location </a>
       </div>
       <div
       class="requestTable-firstTable_table__getstart"
       v-if="request.requestStateName === 'Pending'"
       @click="rescuer.requestId = request.requestId"
-      v-b-modal.modal-1>
+      v-b-modal.assign-Agent>
       Accept
       </div>
     </li>
   </ul>
-  <b-modal id="modal-1" title="Choose Agent" @ok="handleOk">
+  <b-modal id="assign-Agent" title="Choose Agent" @ok="handleOk">
     <p v-if="Rescuers.length === 0">Sorry, We can't find any online Agent</p>
     <form @submit.stop.prevent="handleSubmit" v-else>
     <b-form-select v-model="rescuer.rescuerEmail" class="mb-3">
@@ -39,6 +39,11 @@
     </b-form-select>
     </form>
   </b-modal>
+  <a class="float">
+    <router-link :to="{name: 'registerAgent'}">
+    <b-icon-plus style="margin-bottom: 20px;"></b-icon-plus>
+    </router-link>
+</a>
 </div>
 </template>
 <script>
@@ -53,13 +58,12 @@ export default {
         requestId: null,
         rescuerEmail: '',
       },
-      rescuers: this.$store.state.personnel.rescuers,
     };
   },
   created() {
     this.getSOSRequests();
     this.connection = new signalR.HubConnectionBuilder()
-      .withUrl('https://personalsafety.azurewebsites.net/hubs/personnel', {
+      .withUrl('http://localhost:5566/hubs/agent', {
         // eslint-disable-next-line prefer-template
         accessTokenFactory: () => localStorage.getItem('token'),
       })
@@ -72,14 +76,20 @@ export default {
       });
   },
   mounted() {
-    this.connection.on('PersonnelChannel', () => {
+    this.connection.on('AgentRequestsChannel', () => {
       this.getSOSRequests();
       console.log('changes Recieved');
+    });
+    this.connection.on('AgentRescuersChannel', () => {
+      this.getRescuers();
+      console.log('rescuers Recieved');
     });
   },
   methods: {
     getSOSRequests() {
       this.$store.dispatch('personnel/getRequests');
+    },
+    getRescuers() {
       this.$store.dispatch('personnel/getResquers');
     },
     acceptRequest(requestId, rescuerEmail) {
@@ -97,7 +107,7 @@ export default {
       console.log(this.rescuer.requestId);
       // eslint-disable-next-line no-console
       console.log(this.rescuer.rescuerEmail);
-      this.acceptRequest(this.rescuer.requestId, this.rescuer.rescuerEmail);
+      this.acceptRequest(this.rescuer);
     },
   },
   computed: {
@@ -117,6 +127,20 @@ $h3color: #b4bdc6;
 $widthoftable: 31%;
 $bgctables: #ffffff;
 $bgfontcolor: #717787;
+
+.float{
+   position:fixed;
+    width:60px;
+    height:60px;
+    bottom:40px;
+    right:40px;
+    background-color:#343A40;
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+    font-size: 4rem;
+}
 
 .requestTable{
   margin: 40px auto;

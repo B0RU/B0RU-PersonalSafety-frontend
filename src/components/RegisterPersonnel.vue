@@ -77,13 +77,13 @@ export default {
       return this.form.fullName.length > 4;
     },
     getMessages() {
-      return this.$store.state.admin.status;
+      return this.$store.state.register.message.messages[0];
     },
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      this.$store.dispatch('admin/register', this.form);
+      this.$store.dispatch('register/registerPersonnel', this.form);
     },
     onReset(evt) {
       evt.preventDefault();

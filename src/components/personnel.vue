@@ -103,10 +103,6 @@ export default {
       this.handleSubmit();
     },
     handleSubmit() {
-      // eslint-disable-next-line no-console
-      console.log(this.rescuer.requestId);
-      // eslint-disable-next-line no-console
-      console.log(this.rescuer.rescuerEmail);
       this.acceptRequest(this.rescuer);
     },
   },

@@ -77,7 +77,7 @@ export default {
       return this.form.fullName.length > 4;
     },
     getMessages() {
-      return this.$store.state.register.message.messages[0];
+      return this.$store.getters.messages;
     },
   },
   methods: {

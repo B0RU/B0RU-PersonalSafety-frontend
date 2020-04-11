@@ -6,6 +6,7 @@ export default {
     Requests: {},
     status: '',
     rescuers: {},
+    passwordMessages: {},
   },
   mutations: {
     get_request(state) {
@@ -21,6 +22,10 @@ export default {
     },
     get_rescuers(state, rescuers) {
       state.rescuers = rescuers;
+      state.status = 'success';
+    },
+    updatePassword(state, passwordMessages) {
+      state.passwordMessages = passwordMessages;
       state.status = 'success';
     },
   },
@@ -73,6 +78,21 @@ export default {
           .then((res) => {
             const onlineRescuers = res.data.result;
             commit('get_rescuers', onlineRescuers);
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('get_error');
+            reject(err);
+          });
+      });
+    },
+    updatePassword({ commit }, userPassword) {
+      return new Promise((resolve, reject) => {
+        commit('get_request');
+        axios.post('http://localhost:5566/api/Account/ResetPassword', userPassword)
+          .then((res) => {
+            const passwordMessages = res.data.messages;
+            commit('updatePassword', passwordMessages);
             resolve(res);
           })
           .catch((err) => {

@@ -31,7 +31,7 @@
     </li>
   </ul>
   <b-modal id="assign-Agent" title="Choose Agent" @ok="handleOk">
-    <p v-if="Rescuers.length === 0">Sorry, We can't find any online Agent</p>
+    <p v-if="!Rescuers">Sorry, We can't find any online Agent</p>
     <form @submit.stop.prevent="handleSubmit" v-else>
     <b-form-select v-model="rescuer.rescuerEmail" class="mb-3">
       <b-form-select-option v-for="rescuer in Rescuers" :key="rescuer.userId"
@@ -62,6 +62,7 @@ export default {
   },
   created() {
     this.getSOSRequests();
+    this.getRescuers();
     this.connection = new signalR.HubConnectionBuilder()
       .withUrl('http://localhost:5566/hubs/agent', {
         // eslint-disable-next-line prefer-template
@@ -108,7 +109,7 @@ export default {
   },
   computed: {
     SOSRequests() {
-      return this.$store.getters.SOSRequests;
+      return this.$store.state.personnel.Requests;
     },
     Rescuers() {
       return this.$store.state.personnel.rescuers;

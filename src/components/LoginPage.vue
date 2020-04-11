@@ -51,6 +51,8 @@ export default {
         .then(() => {
           if (this.isAdmin) {
             this.$router.push('/admin/register-personnel');
+          } else if (this.$store.getters.statusCode === -2) {
+            this.$router.push('/personnel/resetPassword');
           } else {
             this.$router.push('/personnel');
           }

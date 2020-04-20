@@ -1,12 +1,6 @@
 import axios from 'axios';
 
-const agentCall = axios.create({
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${localStorage.getItem('token')}`,
-  },
-});
+const agentCall = axios.create();
 
 export default {
   GetDepartmentDetails() {
@@ -42,5 +36,4 @@ export default {
   ResetSOSRequest(requestId) {
     return agentCall.put(`/api/Agent/SOS/ResetSOSRequest?requestId=${requestId}`);
   },
-
 };

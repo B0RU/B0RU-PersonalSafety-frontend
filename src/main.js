@@ -10,14 +10,11 @@ import store from './store';
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.config.productionTip = false;
-Vue.prototype.$http = Axios;
 Axios.defaults.baseURL = 'http://localhost:5000';
-// eslint-disable-next-line prefer-template
-const token = 'Bearer ' + localStorage.getItem('token');
+const token = localStorage.getItem('token');
 if (token) {
-  Vue.prototype.$http.defaults.headers.common.Authorization = token;
+  Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
-
 
 new Vue({
   router,

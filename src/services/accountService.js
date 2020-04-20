@@ -1,11 +1,6 @@
 import axios from 'axios';
 
-const accountCall = axios.create({
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-});
+const accountCall = axios.create();
 
 export default {
   Login(user) {

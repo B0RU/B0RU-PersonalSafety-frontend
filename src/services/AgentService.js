@@ -34,14 +34,14 @@ export default {
   GetAuthorityCanceledRequests() {
     return agentCall.get('/api/Agent/SOS/GetAuthorityCanceledRequests');
   },
-  RegisterRescuer() {
-    return agentCall.post('/api/Agent/Rescuer/RegisterRescuer');
+  RegisterRescuer(rescuer) {
+    return agentCall.post('/api/Agent/Rescuer/RegisterRescuer', rescuer);
   },
-  AcceptSOSRequest() {
-    return agentCall.put('/api/Agent/SOS/AcceptSOSRequest');
+  AcceptSOSRequest(requestId, rescuerEmail) {
+    return agentCall.put(`/api/Agent/SOS/AcceptSOSRequest?requestId=${requestId}&rescuerEmail=${rescuerEmail}`);
   },
-  ResetSOSRequest() {
-    return agentCall.get('/api/Agent/SOS/ResetSOSRequest');
+  ResetSOSRequest(requestId) {
+    return agentCall.put(`/api/Agent/SOS/ResetSOSRequest?requestId=${requestId}`);
   },
 
 };

@@ -10,10 +10,10 @@ const adminCall = axios.create({
 });
 
 export default {
-  getDepartments() {
+  GetDepartments() {
     return adminCall.get('/api/Admin/GetDepartments');
   },
-  postDepartment() {
+  RegisterAgent() {
     return adminCall.post('/api/Admin/RegisterAgent');
   },
 };

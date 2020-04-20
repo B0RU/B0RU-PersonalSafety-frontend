@@ -11,6 +11,7 @@ Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.config.productionTip = false;
 Vue.prototype.$http = Axios;
+Axios.defaults.baseURL = 'http://localhost:5000';
 // eslint-disable-next-line prefer-template
 const token = 'Bearer ' + localStorage.getItem('token');
 if (token) {

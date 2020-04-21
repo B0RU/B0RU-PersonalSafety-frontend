@@ -33,7 +33,7 @@ export default {
     getRequests({ commit }) {
       return new Promise((resolve, reject) => {
         commit('get_request');
-        axios.get('http://localhost:5566/api/Agent/SOS/GetAllAuthorityRequests', {
+        axios.get('/api/Agent/SOS/GetAllAuthorityRequests', {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -52,7 +52,7 @@ export default {
     },
     acceptRequest({ commit }, requestInfo) {
       return new Promise((resolve, reject) => {
-        axios.put(`http://localhost:5566/api/Agent/SOS/AcceptSOSRequest?requestId=${requestInfo.requestId}&rescuerEmail=${requestInfo.rescuerEmail}`, {
+        axios.put(`/api/Agent/SOS/AcceptSOSRequest?requestId=${requestInfo.requestId}&rescuerEmail=${requestInfo.rescuerEmail}`, {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -69,7 +69,7 @@ export default {
     getResquers({ commit }) {
       return new Promise((resolve, reject) => {
         commit('get_request');
-        axios.get('http://localhost:5566/api/Agent/Rescuer/GetOnlineRescuers', {
+        axios.get('/api/Agent/Rescuer/GetOnlineRescuers', {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -89,7 +89,7 @@ export default {
     updatePassword({ commit }, userPassword) {
       return new Promise((resolve, reject) => {
         commit('get_request');
-        axios.post('http://localhost:5566/api/Account/ResetPassword', userPassword)
+        axios.post('/api/Account/ResetPassword', userPassword)
           .then((res) => {
             const passwordMessages = res.data.messages;
             commit('updatePassword', passwordMessages);

@@ -24,7 +24,7 @@ export default {
     registerPersonnel({ commit }, personnel) {
       return new Promise((resolve, reject) => {
         commit('reg_request');
-        axios.post('http://localhost:5566/api/Admin/RegisterAgent', personnel, {
+        axios.post('/api/Admin/RegisterAgent', personnel, {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -44,7 +44,7 @@ export default {
     registerRescuer({ commit }, rescuer) {
       return new Promise((resolve, reject) => {
         commit('reg_request');
-        axios.post('http://localhost:5566/api/Agent/Rescuer/RegisterRescuer', rescuer, {
+        axios.post('/api/Agent/Rescuer/RegisterRescuer', rescuer, {
           headers: {
             // eslint-disable-next-line prefer-template
             Authorization: 'Bearer ' + localStorage.getItem('token'),

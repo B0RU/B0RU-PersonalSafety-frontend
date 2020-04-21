@@ -1,4 +1,5 @@
-import axios from 'axios';
+import adminService from '../../services/adminService';
+import agentService from '../../services/agentService';
 
 export default {
   namespaced: true,
@@ -24,12 +25,7 @@ export default {
     registerPersonnel({ commit }, personnel) {
       return new Promise((resolve, reject) => {
         commit('reg_request');
-        axios.post('/api/Admin/RegisterAgent', personnel, {
-          headers: {
-            // eslint-disable-next-line prefer-template
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
-          },
-        })
+        adminService.RegisterAgent(personnel)
           .then((res) => {
             const response = res.data;
             commit('reg_success', response);
@@ -44,12 +40,7 @@ export default {
     registerRescuer({ commit }, rescuer) {
       return new Promise((resolve, reject) => {
         commit('reg_request');
-        axios.post('/api/Agent/Rescuer/RegisterRescuer', rescuer, {
-          headers: {
-            // eslint-disable-next-line prefer-template
-            Authorization: 'Bearer ' + localStorage.getItem('token'),
-          },
-        })
+        agentService.RegisterRescuer(rescuer)
           .then((res) => {
             const response = res.data;
             commit('reg_success', response);

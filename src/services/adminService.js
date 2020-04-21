@@ -11,7 +11,7 @@ export default {
   GetDepartments() {
     return adminCall.get('/api/Admin/GetDepartments');
   },
-  RegisterAgent() {
-    return adminCall.post('/api/Admin/RegisterAgent');
+  RegisterAgent(personnel) {
+    return adminCall.post('/api/Admin/RegisterAgent', personnel);
   },
 };

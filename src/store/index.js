@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
 import registerModule from './modules/register';
 import personnelModule from './modules/personnel';
 import accountService from '../services/accountService';
@@ -23,7 +22,6 @@ export default new Vuex.Store({
     login_success(state, token) {
       state.status = 'success';
       state.token = token;
-      localStorage.setItem('token', token);
     },
     login_messages(state, messages) {
       state.messages = messages;
@@ -34,18 +32,14 @@ export default new Vuex.Store({
     authError(state, message) {
       state.errorMessage = message;
       state.status = 'error';
-      localStorage.removeItem('token');
-      localStorage.removeItem('email');
     },
     logout(state) {
       state.status = '';
       state.token = '';
+      state.email = '';
       state.messages = {};
       state.personnel.passwordMessages = {};
       state.register.message = '';
-      localStorage.removeItem('token');
-      localStorage.removeItem('email');
-      delete axios.defaults.headers.common.Authorization;
     },
   },
   actions: {
@@ -58,6 +52,7 @@ export default new Vuex.Store({
             const token = res.data.result;
             const { messages } = res.data;
             const statusCode = res.data.status;
+            localStorage.setItem('token', token);
             commit('login_success', token);
             commit('login_messages', messages);
             commit('login_statusCode', statusCode);
@@ -65,6 +60,8 @@ export default new Vuex.Store({
           })
           .catch((err) => {
             commit('authError', err.response.data.messages[0]);
+            localStorage.removeItem('token');
+            localStorage.removeItem('email');
             reject(err);
           });
       });
@@ -72,6 +69,8 @@ export default new Vuex.Store({
     logout({ commit }) {
       return new Promise((resolve) => {
         commit('logout');
+        localStorage.removeItem('token');
+        localStorage.removeItem('email');
         resolve();
       });
     },

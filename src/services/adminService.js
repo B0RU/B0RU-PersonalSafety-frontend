@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-const adminCall = axios.create();
+const token = localStorage.getItem('token');
+const adminCall = axios.create({
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+});
 
 export default {
   GetDepartments() {

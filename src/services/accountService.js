@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const accountCall = axios.create();
+const token = localStorage.getItem('token');
 
 export default {
   Login(user) {
@@ -12,7 +13,7 @@ export default {
   ChangePassword(userPassword) {
     return accountCall.post('/api/Account/ChangePassword', userPassword, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   },

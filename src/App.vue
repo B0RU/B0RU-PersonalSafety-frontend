@@ -16,7 +16,9 @@ export default {
   name: 'App',
   created() {
     Axios.interceptors.response.use(undefined, (err) => new Promise(() => {
-      this.logout();
+      if (err.status === 401) {
+        this.logout();
+      }
       throw err;
     }));
   },

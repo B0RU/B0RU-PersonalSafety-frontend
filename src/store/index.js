@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import registerModule from './modules/register';
 import personnelModule from './modules/personnel';
+import accountService from '../services/accountService';
 
 Vue.use(Vuex);
 
@@ -22,12 +23,10 @@ export default new Vuex.Store({
     login_success(state, token) {
       state.status = 'success';
       state.token = token;
+      localStorage.setItem('token', token);
     },
     login_messages(state, messages) {
       state.messages = messages;
-    },
-    login_email(state, email) {
-      state.email = email;
     },
     login_statusCode(state, statusCode) {
       state.statusCode = statusCode;
@@ -35,6 +34,8 @@ export default new Vuex.Store({
     authError(state, message) {
       state.errorMessage = message;
       state.status = 'error';
+      localStorage.removeItem('token');
+      localStorage.removeItem('email');
     },
     logout(state) {
       state.status = '';
@@ -42,6 +43,9 @@ export default new Vuex.Store({
       state.messages = {};
       state.personnel.passwordMessages = {};
       state.register.message = '';
+      localStorage.removeItem('token');
+      localStorage.removeItem('email');
+      delete axios.defaults.headers.common.Authorization;
     },
   },
   actions: {
@@ -49,14 +53,11 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         commit('login_request');
         localStorage.setItem('email', user.email);
-        axios.post('http://localhost:5566/api/Account/Login', user)
+        accountService.Login(user)
           .then((res) => {
             const token = res.data.result;
             const { messages } = res.data;
             const statusCode = res.data.status;
-            localStorage.setItem('token', token);
-            // eslint-disable-next-line prefer-template
-            axios.defaults.headers.common.Authorization = 'Bearer ' + token;
             commit('login_success', token);
             commit('login_messages', messages);
             commit('login_statusCode', statusCode);
@@ -64,7 +65,6 @@ export default new Vuex.Store({
           })
           .catch((err) => {
             commit('authError', err.response.data.messages[0]);
-            localStorage.removeItem('token');
             reject(err);
           });
       });
@@ -72,9 +72,6 @@ export default new Vuex.Store({
     logout({ commit }) {
       return new Promise((resolve) => {
         commit('logout');
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
-        delete axios.defaults.headers.common.Authorization;
         resolve();
       });
     },

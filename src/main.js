@@ -10,7 +10,6 @@ import store from './store';
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.config.productionTip = false;
-Axios.defaults.baseURL = 'http://localhost:5000';
 const token = localStorage.getItem('token');
 if (token) {
   Axios.defaults.headers.common.Authorization = `Bearer ${token}`;

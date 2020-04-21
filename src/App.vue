@@ -10,15 +10,13 @@
 </template>
 
 <script>
+import Axios from 'axios';
 
 export default {
   name: 'App',
   created() {
-    this.$http.interceptors.response.use(undefined, (err) => new Promise(() => {
-      // eslint-disable-next-line no-underscore-dangle
-      if (err.status === 401) {
-        this.logout();
-      }
+    Axios.interceptors.response.use(undefined, (err) => new Promise(() => {
+      this.logout();
       throw err;
     }));
   },

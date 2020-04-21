@@ -37,7 +37,6 @@ export default {
     return {
       form: {
         email: localStorage.getItem('email'),
-        // eslint-disable-next-line prefer-template
         token: localStorage.getItem('token'),
         newPassword: '',
         confirmPassword: '',

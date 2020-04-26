@@ -11,7 +11,7 @@ Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.config.productionTip = false;
 Vue.prototype.$hostname = 'https://personal-safety.azurewebsites.net';
-Axios.defaults.baseURL = this.$hostname;
+Axios.defaults.baseURL = Vue.prototype.$hostname;
 const token = localStorage.getItem('token');
 if (token) {
   Axios.defaults.headers.common.Authorization = `Bearer ${token}`;

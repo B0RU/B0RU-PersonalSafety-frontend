@@ -9,61 +9,59 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    email: localStorage.getItem('email') || '',
-    messages: {},
     status: '',
-    token: localStorage.getItem('token') || '',
-    errorMessage: null,
+    hasErrors: false,
     statusCode: null,
+    messages: null,
+    authenticationDetails: JSON.parse(localStorage.getItem('authenticationDetails')) || {},
+    accountDetails: JSON.parse(localStorage.getItem('accountDetails')) || null,
   },
   mutations: {
     login_request(state) {
       state.status = 'loading';
     },
-    login_success(state, token) {
+    login_success(state, payload) {
       state.status = 'success';
-      state.token = token;
+      state.authenticationDetails = payload.authenticationDetails;
+      state.accountDetails = payload.accountDetails;
+      state.statusCode = payload.response.status;
+      state.messages = payload.response.messages;
+      state.hasErrors = payload.response.hasErrors;
     },
-    login_messages(state, messages) {
-      state.messages = messages;
-    },
-    login_statusCode(state, statusCode) {
-      state.statusCode = statusCode;
-    },
-    authError(state, message) {
-      state.errorMessage = message;
+    authError(state, payload) {
       state.status = 'error';
+      // eslint-disable-next-line prefer-destructuring
+      state.messages = payload.messages[0];
+      state.statusCode = payload.status;
+      state.hasErrors = payload.hasErrors;
     },
     logout(state) {
       state.status = '';
-      state.token = '';
-      state.email = '';
-      state.messages = {};
-      state.personnel.passwordMessages = {};
-      state.register.message = '';
+      state.hasErrors = false;
+      state.accountDetails = {};
+      state.authenticationDetails = {};
+      state.messages = null;
+      state.statusCode = null;
     },
   },
   actions: {
     login({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('login_request');
-        localStorage.setItem('email', user.email);
         accountService.Login(user)
           .then((res) => {
-            const token = res.data.result;
-            const { messages } = res.data;
-            const statusCode = res.data.status;
-            localStorage.setItem('token', token);
-            axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-            commit('login_success', token);
-            commit('login_messages', messages);
-            commit('login_statusCode', statusCode);
+            const response = res.data;
+            const { authenticationDetails, accountDetails } = response.result;
+            localStorage.setItem('accountDetails', JSON.stringify(accountDetails));
+            localStorage.setItem('authenticationDetails', JSON.stringify(authenticationDetails));
+            axios.defaults.headers.common.Authorization = `Bearer ${authenticationDetails.token}`;
+            commit('login_success', { response, authenticationDetails, accountDetails });
             resolve(res);
           })
           .catch((err) => {
-            commit('authError', err.response.data.messages[0]);
-            localStorage.removeItem('token');
-            localStorage.removeItem('email');
+            commit('authError', err.response.data);
+            localStorage.removeItem('authenticationDetails');
+            localStorage.removeItem('accountDetails');
             reject(err);
           });
       });
@@ -71,17 +69,17 @@ export default new Vuex.Store({
     logout({ commit }) {
       return new Promise((resolve) => {
         commit('logout');
-        localStorage.removeItem('token');
-        localStorage.removeItem('email');
+        localStorage.removeItem('authenticationDetails');
+        localStorage.removeItem('accountDetails');
         delete axios.defaults.headers.common.Authorization;
         resolve();
       });
     },
   },
   getters: {
-    isLoggedIn: (state) => !!state.token,
+    isLoggedIn: (state) => !!state.authenticationDetails.token,
     authStatus: (state) => state.status,
-    user: (state) => (state.messages ? state.messages[2] : ''),
+    user: (state) => (state.accountDetails ? String(state.accountDetails.roles) : ''),
     statusCode: (state) => state.statusCode,
     SOSRequests: (state) => state.personnel.Requests,
     passwordMessages: (state) => state.personnel.passwordMessages,

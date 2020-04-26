@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import axios from 'axios';
 import registerModule from './modules/register';
 import personnelModule from './modules/personnel';
 import accountService from '../services/accountService';
@@ -53,6 +54,7 @@ export default new Vuex.Store({
             const { messages } = res.data;
             const statusCode = res.data.status;
             localStorage.setItem('token', token);
+            axios.defaults.headers.common.Authorization = `Bearer ${token}`;
             commit('login_success', token);
             commit('login_messages', messages);
             commit('login_statusCode', statusCode);
@@ -71,6 +73,7 @@ export default new Vuex.Store({
         commit('logout');
         localStorage.removeItem('token');
         localStorage.removeItem('email');
+        delete axios.defaults.headers.common.Authorization;
         resolve();
       });
     },

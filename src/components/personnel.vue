@@ -65,7 +65,6 @@ export default {
     this.getRescuers();
     this.connection = new signalR.HubConnectionBuilder()
       .withUrl('http://localhost:5000/hubs/agent', {
-        // eslint-disable-next-line prefer-template
         accessTokenFactory: () => localStorage.getItem('token'),
       })
       .configureLogging(signalR.LogLevel.Information)
@@ -75,6 +74,10 @@ export default {
       .catch((error) => {
         console.log(error);
       });
+  },
+  destroyed() {
+    this.connection.stop()
+      .then(() => { console.log('WS connection Stopped'); });
   },
   mounted() {
     this.connection.on('AgentRequestsChannel', () => {

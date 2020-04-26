@@ -64,7 +64,7 @@ export default {
     this.getSOSRequests();
     this.getRescuers();
     this.connection = new signalR.HubConnectionBuilder()
-      .withUrl('/hubs/agent', {
+      .withUrl('http://localhost:5000/hubs/agent', {
         // eslint-disable-next-line prefer-template
         accessTokenFactory: () => localStorage.getItem('token'),
       })

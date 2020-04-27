@@ -36,8 +36,8 @@ export default {
   data() {
     return {
       form: {
-        email: localStorage.getItem('email'),
-        token: localStorage.getItem('token'),
+        email: this.$store.state.authenticationDetails.email,
+        token: this.$store.state.authenticationDetails.token,
         newPassword: '',
         confirmPassword: '',
       },

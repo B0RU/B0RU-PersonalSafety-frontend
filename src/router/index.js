@@ -5,7 +5,7 @@ import Home from '../components/HomePage.vue';
 import LoginPage from '../components/LoginPage.vue';
 import RegisterPersonnel from '../components/RegisterPersonnel.vue';
 import Personnel from '../components/personnel.vue';
-import RegisterAgent from '../components/RegisterAgent.vue';
+import RegisterRescuer from '../components/RegisterRescuer.vue';
 import ResetPassword from '../components/ResetPassword.vue';
 
 Vue.use(VueRouter);
@@ -39,8 +39,8 @@ const routes = [
   },
   {
     path: '/personnel/register-agent',
-    name: 'registerAgent',
-    component: RegisterAgent,
+    name: 'RegisterRescuer',
+    component: RegisterRescuer,
     meta: {
       requiresAuth: true,
     },

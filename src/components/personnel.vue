@@ -40,7 +40,7 @@
     </form>
   </b-modal>
   <a class="float">
-    <router-link :to="{name: 'registerAgent'}">
+    <router-link :to="{name: 'RegisterRescuer'}">
     <b-icon-plus style="margin-bottom: 20px;"></b-icon-plus>
     </router-link>
 </a>
@@ -65,7 +65,7 @@ export default {
     this.getRescuers();
     this.connection = new signalR.HubConnectionBuilder()
       .withUrl(`${this.$hostname}/hubs/agent`, {
-        accessTokenFactory: () => localStorage.getItem('token'),
+        accessTokenFactory: () => this.$store.state.authenticationDetails.token,
       })
       .configureLogging(signalR.LogLevel.Information)
       .build();

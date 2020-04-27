@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: 'RegisterAgent',
+  name: 'RegisterRescuer',
   data() {
     return {
       form: {

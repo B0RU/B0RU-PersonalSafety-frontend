@@ -2,6 +2,34 @@
 <b-card class="main" title="Create" sub-title="New Rescuer" bg-variant="dark">
   <b-container fluid>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+            <div class="name">
+              <b-col sm="2">
+                <label for="firstName" class="label">First Name</label>
+              </b-col>
+              <b-col sm="5">
+                <b-form-input
+                v-model="form.firstName"
+                id="firstName"
+                size="lg"
+                placeholder="Type Rescuer First Name"
+                type="string"
+                required
+                ></b-form-input>
+              </b-col>
+              <b-col sm="2">
+                <label for="lastName" class="label">last Name</label>
+              </b-col>
+              <b-col sm="5">
+                <b-form-input
+                v-model="form.lastName"
+                id="lastName"
+                size="lg"
+                placeholder="Type Rescuer Last Name"
+                type="string"
+                required
+                ></b-form-input>
+              </b-col>
+            </div>
             <div class="email">
             <b-col sm="2">
                 <label for="email" class="label">Email</label>
@@ -54,6 +82,8 @@ export default {
   data() {
     return {
       form: {
+        firstName: '',
+        lastName: '',
         email: '',
         password: '',
       },
@@ -82,6 +112,8 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
+      this.form.firstName = '';
+      this.form.lastName = '';
       this.form.email = '';
       this.form.password = '';
       this.confirm = '';

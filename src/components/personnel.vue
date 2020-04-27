@@ -31,7 +31,7 @@
     </li>
   </ul>
   <b-modal id="assign-Agent" title="Choose Agent" @ok="handleOk">
-    <p v-if="!Rescuers">Sorry, We can't find any online Agent</p>
+    <p v-if="Rescuers.length === 0">Sorry, We can't find any online Agent</p>
     <form @submit.stop.prevent="handleSubmit" v-else>
     <b-form-select v-model="rescuer.rescuerEmail" class="mb-3">
       <b-form-select-option v-for="rescuer in Rescuers" :key="rescuer.userId"

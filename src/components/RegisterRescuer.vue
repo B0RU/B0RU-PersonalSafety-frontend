@@ -12,7 +12,7 @@
                 id="firstName"
                 size="lg"
                 placeholder="Type Rescuer First Name"
-                type="string"
+                type="text"
                 required
                 ></b-form-input>
               </b-col>
@@ -25,7 +25,7 @@
                 id="lastName"
                 size="lg"
                 placeholder="Type Rescuer Last Name"
-                type="string"
+                type="text"
                 required
                 ></b-form-input>
               </b-col>

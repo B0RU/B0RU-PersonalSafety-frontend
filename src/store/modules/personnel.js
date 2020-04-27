@@ -35,7 +35,7 @@ export default {
     getRequests({ commit }) {
       return new Promise((resolve, reject) => {
         commit('get_request');
-        agentService.GetAllAuthorityRequests()
+        agentService.GetAllRequests()
           .then((res) => {
             const SOSRequests = res.data.result;
             commit('getRequests_success', SOSRequests);

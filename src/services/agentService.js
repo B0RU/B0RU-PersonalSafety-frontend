@@ -5,28 +5,28 @@ export default {
     return axios.get('/api/Agent/Department/GetDepartmentDetails');
   },
   GetOnlineRescuers() {
-    return axios.get('/api/Agent/Rescuer/GetOnlineRescuers');
+    return axios.get('/api/Agent/Resucer/GetOnlineRescuers');
   },
   GetDisconnectedRescuers() {
-    return axios.get('/api/Agent/Rescuer/GetDisconnectedRescuers');
+    return axios.get('/api/Agent/Resucer/GetDisconnectedRescuers');
   },
-  GetAllAuthorityRequests() {
-    return axios.get('/api/Agent/SOS/GetAllAuthorityRequests');
+  GetAllRequests() {
+    return axios.get('/api/Agent/SOS/GetAllRequests');
   },
-  GetAuthorityPendingRequests() {
-    return axios.get('/api/Agent/SOS/GetAuthorityPendingRequests');
+  GetPendingRequests() {
+    return axios.get('/api/Agent/SOS/GetPendingRequests');
   },
-  GetAuthorityAcceptedRequests() {
-    return axios.get('/api/Agent/SOS/GetAuthorityAcceptedRequests');
+  GetAcceptedRequests() {
+    return axios.get('/api/Agent/SOS/GetAcceptedRequests');
   },
-  GetAuthoritySolvedRequests() {
-    return axios.get('/api/Agent/SOS/GetAuthoritySolvedRequests');
+  GetSolvedRequests() {
+    return axios.get('/api/Agent/SOS/GetSolvedRequests');
   },
-  GetAuthorityCanceledRequests() {
-    return axios.get('/api/Agent/SOS/GetAuthorityCanceledRequests');
+  GetCanceledRequests() {
+    return axios.get('/api/Agent/SOS/GetCanceledRequests');
   },
   RegisterRescuer(rescuer) {
-    return axios.post('/api/Agent/Rescuer/RegisterRescuer', rescuer);
+    return axios.post('/api/Agent/Resucer/RegisterRescuer', rescuer);
   },
   AcceptSOSRequest(requestId, rescuerEmail) {
     return axios.put(`/api/Agent/SOS/AcceptSOSRequest?requestId=${requestId}&rescuerEmail=${rescuerEmail}`);

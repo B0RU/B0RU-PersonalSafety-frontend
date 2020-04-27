@@ -41,7 +41,7 @@ export default {
       return this.$store.getters.user === 'Admin';
     },
     authError() {
-      return this.$store.state.errorMessage;
+      return this.$store.state.messages;
     },
   },
   methods: {
@@ -57,7 +57,7 @@ export default {
             this.$router.push('/personnel');
           }
         })
-        .catch((err) => console.log(err.data));
+        .catch((err) => console.log(err));
     },
   },
 };

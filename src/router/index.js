@@ -38,7 +38,7 @@ const routes = [
     },
   },
   {
-    path: '/personnel/register-agent',
+    path: '/personnel/register-rescuer',
     name: 'RegisterRescuer',
     component: RegisterRescuer,
     meta: {

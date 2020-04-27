@@ -10,4 +10,7 @@ export default {
   ChangePassword(userPassword) {
     return axios.post('/api/Account/ChangePassword', userPassword);
   },
+  RefreshToken(authenticationDetails) { // to be Implemnted
+    return axios.post('/api/Account/RefreshToken', authenticationDetails);
+  },
 };

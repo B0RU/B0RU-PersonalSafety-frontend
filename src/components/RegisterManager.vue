@@ -16,7 +16,7 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Authority Name:" label-for="input-2">
+      <b-form-group id="input-group-2" label="Manager Name:" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="form.fullName"
@@ -36,10 +36,6 @@
             aria-describedby="password-help-block"
         ></b-form-input>
       </b-form-group>
-      <b-form-radio-group id="input-group-4" required v-model="form.authorityType" :state="Authoritystate" :options="options" label="Authority Type:">
-              <b-form-invalid-feedback :state="Authoritystate"></b-form-invalid-feedback>
-              <b-form-valid-feedback :state="Authoritystate"></b-form-valid-feedback>
-      </b-form-radio-group>
 
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
@@ -84,7 +80,7 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      this.$store.dispatch('register/registerPersonnel', this.form);
+      this.$store.dispatch('', this.form);
     },
     onReset(evt) {
       evt.preventDefault();
@@ -116,5 +112,4 @@ export default {
 button{
     margin: 1rem;
 }
-
 </style>

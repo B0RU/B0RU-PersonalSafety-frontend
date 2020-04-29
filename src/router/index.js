@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '../store';
-import Home from '../components/HomePage.vue';
-import LoginPage from '../components/LoginPage.vue';
+import Home from '../views/HomePage.vue';
+import LoginPage from '../views/LoginPage.vue';
+import AdminPanel from '../views/AdminPanel.vue';
 import RegisterPersonnel from '../components/RegisterPersonnel.vue';
-import Personnel from '../components/personnel.vue';
-import RegisterRescuer from '../components/RegisterRescuer.vue';
-import ResetPassword from '../components/ResetPassword.vue';
+import RegisterManager from '../components/RegisterManager.vue';
+import Personnel from '../views/personnel.vue';
+import RegisterRescuer from '../views/RegisterRescuer.vue';
+import ResetPassword from '../views/ResetPassword.vue';
 
 Vue.use(VueRouter);
 
@@ -22,9 +24,18 @@ const routes = [
     component: LoginPage,
   },
   {
-    path: '/admin/register-personnel',
-    name: 'registerPersonnl',
-    component: RegisterPersonnel,
+    path: '/admin',
+    name: 'adminPanel',
+    component: AdminPanel,
+    children: [{
+      path: 'register-agent',
+      name: 'registerAgent',
+      component: RegisterPersonnel,
+    }, {
+      path: 'register-manager',
+      name: 'registerManager',
+      component: RegisterManager,
+    }],
     meta: {
       requiresAuth: true,
     },

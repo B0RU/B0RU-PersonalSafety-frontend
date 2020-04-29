@@ -50,7 +50,7 @@ export default {
       this.$store.dispatch('login', this.form)
         .then(() => {
           if (this.isAdmin) {
-            this.$router.push('/admin/register-personnel');
+            this.$router.push('/admin');
           } else if (this.$store.getters.statusCode === -2) {
             this.$router.push('/personnel/resetPassword');
           } else {

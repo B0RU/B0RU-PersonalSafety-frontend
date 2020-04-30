@@ -106,9 +106,8 @@ export default {
 <style lang="scss" scoped>
 
 .main{
-    max-width: 40%;
+    max-width: 50%;
     margin: 0 auto;
-    margin-top: 4% ;
     color: black;
     position: relative;
 

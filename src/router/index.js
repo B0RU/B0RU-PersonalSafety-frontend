@@ -6,6 +6,7 @@ import LoginPage from '../views/LoginPage.vue';
 import AdminPanel from '../views/AdminPanel.vue';
 import RegisterPersonnel from '../components/RegisterPersonnel.vue';
 import RegisterManager from '../components/RegisterManager.vue';
+import AdminActions from '../components/AdminActions.vue';
 import Personnel from '../views/personnel.vue';
 import RegisterRescuer from '../views/RegisterRescuer.vue';
 import ResetPassword from '../views/ResetPassword.vue';
@@ -35,6 +36,10 @@ const routes = [
       path: 'register-manager',
       name: 'registerManager',
       component: RegisterManager,
+    }, {
+      path: 'dashboard',
+      name: 'adminDashboard',
+      component: AdminActions,
     }],
     meta: {
       requiresAuth: true,

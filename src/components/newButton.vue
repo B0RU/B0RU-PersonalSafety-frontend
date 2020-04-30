@@ -1,12 +1,12 @@
 <template>
-<div class="newBtn"> New {{name}}</div>
+<div class="newBtn"> {{action}} </div>
 </template>
 
 <script>
 export default {
   name: 'add-button',
   props: {
-    name: {
+    action: {
       type: String,
     },
   },

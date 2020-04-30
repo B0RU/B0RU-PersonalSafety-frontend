@@ -10,7 +10,7 @@ import store from './store';
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Vue.config.productionTip = false;
-Vue.prototype.$hostname = 'https://personal-safety.azurewebsites.net';
+Vue.prototype.$hostname = 'http://localhost:5000';
 Axios.defaults.baseURL = Vue.prototype.$hostname;
 const { token } = store.state.authenticationDetails;
 if (token) {

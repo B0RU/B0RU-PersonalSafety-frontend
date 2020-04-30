@@ -37,6 +37,32 @@ export default {
           });
       });
     },
+    resetClient({ commit }, email) {
+      return new Promise((resolve, reject) => {
+        commit('reg_request');
+        adminService.ResetClientState(email)
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('get_error');
+            reject(err);
+          });
+      });
+    },
+    resetRescuer({ commit }, email) {
+      return new Promise((resolve, reject) => {
+        commit('reg_request');
+        adminService.ResetRescuerState(email)
+          .then((res) => {
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('get_error');
+            reject(err);
+          });
+      });
+    },
     registerRescuer({ commit }, rescuer) {
       return new Promise((resolve, reject) => {
         commit('reg_request');

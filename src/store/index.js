@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import axios from 'axios';
 import registerModule from './modules/register';
 import personnelModule from './modules/personnel';
+import managerModule from './modules/manager';
 import accountService from '../services/accountService';
 
 Vue.use(Vuex);
@@ -89,5 +90,6 @@ export default new Vuex.Store({
   modules: {
     register: registerModule,
     personnel: personnelModule,
+    manager: managerModule,
   },
 });

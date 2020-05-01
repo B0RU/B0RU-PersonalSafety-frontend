@@ -1,27 +1,230 @@
 <template>
     <div class="mainActions">
-        <div class="col-md-6">
-            <jumbotron-component name="Client" action="resetClient"></jumbotron-component>
-        </div>
-        <div class="col-md-6">
-            <jumbotron-component name="Rescuer" action="resetRescuer"></jumbotron-component>
+        <h3>Dashboard</h3>
+        <p class="subhead">Manage Entity</p>
+        <div class='departments'>
+            <ul class="departmentTable-firstTable">
+    <li class="departmentTable-firstTable_table" v-for="department in getDepartments" :key="department.departmentId">
+      <h1 class="departmentTable-firstTable_table__header">{{department.distributionName}} <br> {{department.authorityTypeName}}</h1>
+      <ul class="departmentTable-firstTable_table__department">
+        <li><span>longitude</span><br><span>{{department.longitude}}</span></li>
+        <li><span>latitude</span><br><span>{{department.latitude}}</span></li>
+      </ul>
+      <div class="departmentTable-firstTable_table__getstart"
+      v-b-popover.hover.right="`${department.agentsEmails}`"
+      title="Agents"
+      >
+          View Agents
+      </div>
+      <div class="departmentTable-firstTable_table__getstart"
+      v-b-popover.hover.right="`${department.rescuersEmails}`"
+      title="Rescuers"
+      >
+          View Rescuers
+      </div>
+    </li>
+  </ul>
         </div>
     </div>
 </template>
 
 <script>
-import jumbotronComponent from './JumbotronComponent.vue';
 
 export default {
-  components: {
-    jumbotronComponent,
-
+  computed: {
+    getDepartments() {
+      return this.$store.state.manager.departments;
+    },
   },
 };
 </script>
 
-<style scoped>
+<style lang='scss' scoped>
+$h1color: #6e768d;
+$h3color: #b4bdc6;
+$widthoftable: 28%;
+$bgctables: #ffffff;
+$bgfontcolor: #717787;
+
 .mainActions {
-    display: flex;
+    display: block;
+    text-align: left;
+    padding: 20px;
+}
+.departments{
+    width: 90%;
+    background-color: #293147;
+    border-radius: 15px;
+    margin: 0 auto;
+    margin-top: 50px;
+    overflow-x: auto;
+    white-space: nowrap;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+.subhead{
+    color: gray;
+}
+
+
+.departmentTable{
+  margin: 20px auto;
+  color: black;
+
+  &-firstTable{
+    list-style: none;
+    padding-left: 2em;
+    padding-right: 2em;
+    text-align: center;
+
+    &_table{
+      vertical-align: middle;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      width: $widthoftable;
+      background-color: $bgctables;
+      display: inline-block;
+      padding: 0px 30px 40px;
+      text-align: center;
+      max-width: 320px;
+      transition: all 0.3s ease;
+      border-radius: 5px;
+      margin: 2rem;
+
+      @media screen and (max-width: 767px){
+        display: block;
+        width: 90%;
+        margin: 0 auto;
+        max-width: 90%;
+        margin-bottom: 20px;
+        padding: 10px;
+        padding-left: 20px;
+      }
+
+      & > * {
+         @media screen and (max-width: 767px){
+           display: inline-block;
+           vertical-align: middle;
+        }
+
+         @media screen and (max-width: 480px){
+          display: block;
+           float: none;
+        }
+      }
+
+      &:after {
+         @media screen and (max-width: 767px){
+           display: table;
+           content: '';
+           clear: both;
+        }
+      }
+
+      &:hover{
+        transform: scale(1.08);
+        @media screen and (max-width: 767px){
+          transform: none;
+        }
+      }
+
+      &:not(:last-of-type){
+        margin-right: (100%-$widthoftable*3)/20;
+         @media screen and (max-width: 767px){
+           margin-right: auto;
+         }
+      }
+
+      &__header{
+        font-size: 0.8em;
+        padding-top: 10px;
+        color: black;
+        text-align: left;
+      }
+
+      &__department{
+        text-align: left;
+        list-style: none;
+        margin-bottom: 5px;
+        color: gray;
+        font-size: 3em;
+        padding: 10px 0px;
+        line-height: 0.2;
+
+         @media screen and (max-width: 1068px){
+           font-size: 2.8em;
+        }
+
+        @media screen and (max-width: 767px){
+          border-bottom: none;
+          padding: 0;
+          float: left;
+          clear: left;
+          width: 33%;
+        }
+
+         @media screen and (max-width: 610px){
+          font-size: 2.4em;
+        }
+
+         @media screen and (max-width: 480px){
+           float: none;
+           width: 100%;
+           font-size: 3em;
+           margin-bottom: 10px;
+        }
+
+        span:first-of-type{
+          font-size: 0.35em;
+          // vertical-align: top;
+           @media screen and (max-width: 1068px){
+           font-size: 0.3em;
+          }
+        }
+        span:last-of-type{
+          font-size: 0.30em;
+          padding-left: 0.2em;
+          color: black;
+           @media screen and (max-width: 1068px){
+           font-size: 0.25em;
+          }
+        }
+      }
+
+      &__getstart{
+        color: white !important;
+        background-color: gray;
+        margin-top: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        letter-spacing: 0.07em;
+        transition: all 0.4s ease;
+
+        a{
+          color: white;
+        }
+
+         @media screen and (max-width: 1068px){
+           font-size: 0.95em;
+        }
+
+        @media screen and (max-width: 767px){
+          margin-top: 0;
+        }
+
+         @media screen and (max-width: 610px){
+          font-size: 0.9em;
+           padding: 10px;
+        }
+
+        @media screen and (max-width: 480px){
+          font-size: 1em;
+           width: 50%;
+          margin: 10px auto;
+        }
+
+      }
+    }
+  }
 }
 </style>

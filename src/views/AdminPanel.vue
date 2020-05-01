@@ -24,6 +24,14 @@ export default {
   components: {
     addButton,
   },
+  created() {
+    this.getDepartments();
+  },
+  methods: {
+    getDepartments() {
+      this.$store.dispatch('manager/getDepartments');
+    },
+  },
 };
 </script>
 

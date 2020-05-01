@@ -11,7 +11,7 @@
                 <add-button action="New Manager"></add-button>
             </router-link>
         </div>
-        <div class="dashboard">
+        <div class="main-actions">
         <router-view/>
         </div>
     </div>
@@ -28,13 +28,21 @@ export default {
 </script>
 
 <style>
-.side{
-  width: 15rem;
-  height: 100%;
-  margin: 50px 0px 0px 30px;
-  position: fixed;
+.adminPanel{
+  display: flex;
+    margin-top: 30px;
 }
-.dashboard {
-  margin-top: 4%;
+.side{
+   width: 15%;
+    height: 100%;
+    margin-left: 25px;
+}
+.main-actions {
+    width: 75%;
+    margin: 0 auto;
+    float: right;
+    background-color: #5E657A;
+    height: 500px;
+    border-radius: 15px;
 }
 </style>

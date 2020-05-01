@@ -16,17 +16,15 @@ export default {
 
 <style scoped>
 .newBtn {
-  margin: 10px 0px 20px 0px;
-  width: 15rem;
-  height: 3rem;
-  font-size: 1.2em;
-  text-align: center;
-  padding: 10px;
-  border-radius: 19px;
-  background: #6c63ff;
-  color: #fff;
-  font-family: Roboto;
-  cursor: pointer;
-  font-weight: bolder;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 3rem;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 10px;
+    border-radius: 19px;
+    background: #6C63FF;
+    color: #fff;
+    cursor: pointer;
 }
 </style>

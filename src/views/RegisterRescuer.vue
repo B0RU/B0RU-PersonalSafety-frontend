@@ -1,12 +1,13 @@
 <template>
-<b-card class="main" title="Create" sub-title="New Rescuer" bg-variant="dark">
+<b-card class="main" title="Create" sub-title="New Rescuer" >
   <b-container fluid>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
             <div class="name">
-              <b-col sm="2">
+              <b-col sm="6">
+              <b-col sm="5">
                 <label for="firstName" class="label">First Name</label>
               </b-col>
-              <b-col sm="5">
+              <b-col sm="12">
                 <b-form-input
                 v-model="form.firstName"
                 id="firstName"
@@ -16,10 +17,12 @@
                 required
                 ></b-form-input>
               </b-col>
-              <b-col sm="2">
+              </b-col>
+              <b-col sm="6">
+              <b-col sm="5">
                 <label for="lastName" class="label">last Name</label>
               </b-col>
-              <b-col sm="5">
+              <b-col sm="12">
                 <b-form-input
                 v-model="form.lastName"
                 id="lastName"
@@ -29,25 +32,29 @@
                 required
                 ></b-form-input>
               </b-col>
+              </b-col>
             </div>
             <div class="email">
-            <b-col sm="2">
-                <label for="email" class="label">Email</label>
-            </b-col>
+              <b-col sm="6">
+                <b-col sm="5">
+                  <label for="email" class="label">Email</label>
+                </b-col>
+                <b-col sm="12">
+                  <b-form-input
+                  v-model="form.email"
+                  id="email"
+                  size="lg"
+                  placeholder="Type Rescuer Email"
+                  type="email"
+                  required
+                  ></b-form-input>
+                </b-col>
+              </b-col>
+            <b-col sm="6">
             <b-col sm="5">
-                <b-form-input
-                v-model="form.email"
-                id="email"
-                size="lg"
-                placeholder="Type Rescuer Email"
-                type="email"
-                required
-                ></b-form-input>
-            </b-col>
-            <b-col sm="2">
                 <label for="confirm-email" class="label">Confirm Email</label>
             </b-col>
-            <b-col sm="5">
+            <b-col sm="12">
                 <b-form-input id="confirm-email"
                 v-model="confirm"
                 :state="emailState"
@@ -58,18 +65,24 @@
                 v-bind:value="form.email"
                 ></b-form-input>
             </b-col>
+            </b-col>
             </div>
             <div class="password">
-                <b-col sm="2">
+              <b-col sm="6">
+                <b-col sm="5">
                     <label for="password" class="label">password</label>
                 </b-col>
-                <b-col sm="5">
+                <b-col sm="12">
                     <b-form-input v-model="form.password" id="password" size="lg" disabled></b-form-input>
+                </b-col>
+                </b-col>
+                <b-col sm="6" class="btns">
+                <b-button type="submit" variant="primary">Submit</b-button>
+                <b-button type="reset" variant="danger">Reset</b-button>
                 </b-col>
             </div>
             <div>{{getMessages}}</div>
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+
     </b-form>
   </b-container>
 
@@ -149,6 +162,7 @@ export default {
     margin: 0 auto;
     margin-top: 4% ;
     text-align: left;
+    background-color: #5E657A;
 }
 button{
     margin: 1rem;
@@ -157,6 +171,18 @@ button{
     margin-bottom: 0.5rem;
 }
 .email{
-    display: inline;
+    display: flex;
+    margin-top: 20px;
+}
+.name{
+  display: flex;
+  margin-top: 20px;
+}
+.password{
+  display: flex;
+  margin-top: 20px;
+}
+.btns {
+  margin-top: 15px;
 }
 </style>

@@ -23,7 +23,5 @@ export default {
 <style scoped>
 .mainActions {
     display: flex;
-    width: 80%;
-    float: right;
 }
 </style>

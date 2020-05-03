@@ -7,9 +7,11 @@ import AdminPanel from '../views/AdminPanel.vue';
 import RegisterPersonnel from '../components/RegisterPersonnel.vue';
 import RegisterManager from '../components/RegisterManager.vue';
 import AdminActions from '../components/AdminActions.vue';
+import ManagerPanel from '../views/Manager.vue';
 import Personnel from '../views/personnel.vue';
 import RegisterRescuer from '../views/RegisterRescuer.vue';
 import ResetPassword from '../views/ResetPassword.vue';
+import Requests from '../components/requests.vue';
 
 Vue.use(VueRouter);
 
@@ -40,6 +42,22 @@ const routes = [
       path: 'dashboard',
       name: 'adminDashboard',
       component: AdminActions,
+    }],
+    meta: {
+      requiresAuth: true,
+    },
+  }, {
+    path: '/manager',
+    name: 'managerPanel',
+    component: ManagerPanel,
+    children: [{
+      path: 'dashboard',
+      name: 'managerDashboard',
+      component: AdminActions,
+    }, {
+      path: 'requests/:id',
+      name: 'requests',
+      component: Requests,
     }],
     meta: {
       requiresAuth: true,

@@ -37,8 +37,8 @@ export default {
     };
   },
   computed: {
-    isAdmin() {
-      return this.$store.getters.user === 'Admin';
+    user() {
+      return this.$store.getters.user;
     },
     authError() {
       return this.$store.state.messages;
@@ -49,10 +49,12 @@ export default {
       evt.preventDefault();
       this.$store.dispatch('login', this.form)
         .then(() => {
-          if (this.isAdmin) {
+          if (this.user === 'Admin') {
             this.$router.push('/admin/dashboard');
           } else if (this.$store.getters.statusCode === -2) {
             this.$router.push('/personnel/resetPassword');
+          } else if (this.user === 'Manager') {
+            this.$router.push('/manager/dashboard');
           } else {
             this.$router.push('/personnel');
           }

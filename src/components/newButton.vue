@@ -23,7 +23,7 @@ export default {
     text-align: center;
     padding: 10px;
     border-radius: 19px;
-    background: #6C63FF;
+    background: #6c63ff;
     color: #fff;
     cursor: pointer;
 }

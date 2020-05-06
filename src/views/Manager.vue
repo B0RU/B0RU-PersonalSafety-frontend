@@ -19,7 +19,10 @@ import sideActions from '../components/actions.vue';
 export default {
   data() {
     return {
-      managerActions: ['Requests', 'Events'],
+      managerActions: {
+        Requests: { url: 'requests', value: 'Requests' },
+        Events: { url: 'events', value: 'Events' },
+      },
     };
   },
   components: {

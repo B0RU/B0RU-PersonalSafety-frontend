@@ -1,119 +1,229 @@
 <template>
-<b-card class="main">
-  <div>
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          required
-          placeholder="Enter email"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-2" label="Authority Name:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.fullName"
-          required
-          placeholder="Enter name"
-          :state="nameState"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-form-group id="input-group-3" label="Password:" label-for="input-3">
-        <b-form-input
-            id="text-password"
-            v-model="form.password"
-            type="password"
-            required
-            placeholder="Password"
-            aria-describedby="password-help-block"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-radio-group id="input-group-4" required v-model="form.authorityType" :state="Authoritystate" :options="options" label="Authority Type:">
-              <b-form-invalid-feedback :state="Authoritystate"></b-form-invalid-feedback>
-              <b-form-valid-feedback :state="Authoritystate"></b-form-valid-feedback>
-      </b-form-radio-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
+  <div class="mainActions">
+    <h3>Register Agent</h3>
+    <p class="subhead">Enter the new Agent's Account Details</p>
+    <b-container fluid class="register">
+      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+        <div class="name">
+          <b-col sm="6">
+            <b-col sm="5">
+              <label for="firstName" class="label">First Name</label>
+            </b-col>
+            <b-col sm="12">
+              <b-form-input
+                v-model="firstName"
+                id="firstName"
+                size="md"
+                placeholder="Type Rescuer First Name"
+                type="text"
+                required
+              ></b-form-input>
+            </b-col>
+          </b-col>
+          <b-col sm="6">
+            <b-col sm="5">
+              <label for="lastName" class="label">last Name</label>
+            </b-col>
+            <b-col sm="12">
+              <b-form-input
+                v-model="lastName"
+                id="lastName"
+                size="md"
+                placeholder="Type Rescuer Last Name"
+                type="text"
+                required
+              ></b-form-input>
+            </b-col>
+          </b-col>
+        </div>
+        <div class="email">
+          <b-col sm="6">
+            <b-col sm="5">
+              <label for="email" class="label">Email</label>
+            </b-col>
+            <b-col sm="12">
+              <b-form-input
+                v-model="form.email"
+                id="email"
+                size="md"
+                placeholder="Type Rescuer Email"
+                type="email"
+                required
+              ></b-form-input>
+            </b-col>
+          </b-col>
+          <b-col sm="6">
+            <b-col sm="5">
+              <label for="confirm-email" class="label">Confirm Email</label>
+            </b-col>
+            <b-col sm="12">
+              <b-form-input
+                id="confirm-email"
+                v-model="confirm"
+                :state="emailState"
+                size="md"
+                placeholder="Retype the Email, please"
+                type="email"
+                required
+                v-bind:value="form.email"
+              ></b-form-input>
+            </b-col>
+          </b-col>
+        </div>
+        <div class="password">
+          <b-col sm="6">
+            <b-col sm="5">
+              <label for="password" class="label">password</label>
+            </b-col>
+            <b-col sm="12">
+              <b-form-input v-model="form.password" id="password" size="md" disabled></b-form-input>
+            </b-col>
+          </b-col>
+          <b-col sm="6" class="btns">
+            <b-col sm="7">
+              <label class="label">Department Details</label>
+            </b-col>
+            <b-col sm="14" style="margin-left:15px">
+              <b-button>Select Department</b-button>
+              <b-button>New Department</b-button>
+            </b-col>
+          </b-col>
+        </div>
+        <div>{{getMessages}}</div>
+        <div class="form-btns">
+          <div style="margin:0 auto;">
+            <b-button type="submit">Submit</b-button>
+            <b-button type="reset">Reset</b-button>
+          </div>
+        </div>
+      </b-form>
+    </b-container>
   </div>
-  <div> {{getMessages}} </div>
-
-</b-card>
 </template>
 
 <script>
-
 export default {
+  name: 'RegisterRescuer',
   data() {
     return {
-      form: {
-        email: '',
-        fullName: '',
-        password: '',
-        authorityType: null,
-      },
+      firstName: '',
+      lastName: '',
+      confirm: '',
       show: true,
-      options: [
-        { text: 'Police', value: 1 },
-        { text: 'Ambulance', value: 2 },
-        { text: 'Firefighting', value: 3 },
-        { text: 'TowTruck', value: 4 },
-      ],
+      isLoading: false,
+      passwordLength: 15,
+      form: {
+        fullName: '',
+        email: '',
+        password: '',
+        existingDepartmentId: '',
+        authorityType: '',
+        distributionId: '',
+        departmentLongitude: '',
+        departmentLatitude: '',
+      },
     };
   },
+  mounted() {
+    this.generatePassword();
+  },
   computed: {
-    Authoritystate() {
-      return Boolean(this.form.authorityType);
-    },
-    nameState() {
-      return this.form.fullName.length > 4;
+    emailState() {
+      return this.confirm === this.form.email;
     },
     getMessages() {
-      return this.$store.getters.messages;
+      return this.$store.state.register.message;
     },
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      this.$store.dispatch('register/registerPersonnel', this.form);
+      // this.$store.dispatch('register/registerAgent', this.form);
+      this.form.fullName = `${this.firstName} ${this.lastName}`;
+      console.log(this.form);
     },
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
+      this.firstName = '';
+      this.lastName = '';
       this.form.email = '';
-      this.form.fullName = '';
       this.form.password = '';
-      this.form.authorityType = null;
+      this.confirm = '';
+      this.generatePassword();
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
         this.show = true;
       });
     },
+    generatePassword() {
+      if (!this.passwordLength) return;
+      this.triggerLoading(true);
+      let password = '';
+      let characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      characters += '!#$%&*+-;<=>?@';
+      for (let i = 0; i < this.passwordLength; i += 1) {
+        password += characters.charAt(
+          Math.floor(Math.random() * characters.length),
+        );
+      }
+      this.form.password = password;
+      this.triggerLoading(false);
+    },
+    triggerLoading(state) {
+      this.isLoading = state;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
-.main{
-    max-width: 50%;
+.mainActions {
+  display: block;
+  text-align: left;
+  padding: 20px;
+}
+.subhead {
+  color: gray;
+}
+.register {
+  margin-top: 50px;
+}
+button {
+  background-color: #293147;
+  border: none;
+  font-size: 0.9rem;
+  &:first-of-type{
+  margin-right: 1rem;
+  }
+}
+.label {
+  margin-bottom: 1rem;
+  float: left;
+  color: gray;
+}
+.email {
+  display: flex;
+  margin-top: 20px;
+}
+.name {
+  display: flex;
+  margin-top: 20px;
+}
+.password {
+  display: flex;
+  margin-top: 20px;
+}
+#password {
+  background-color: #293147;
+  border: none;
+}
+.btns {
+  display: grid;
+}
+.form-btns {
     margin: 0 auto;
-    color: black;
-    position: relative;
-
-}
-button{
-    margin: 1rem;
-}
-
+    display: flex;
+    margin-top: 40px;}
 </style>

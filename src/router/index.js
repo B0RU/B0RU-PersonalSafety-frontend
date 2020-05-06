@@ -42,6 +42,10 @@ const routes = [
       path: 'dashboard',
       name: 'adminDashboard',
       component: AdminActions,
+    }, {
+      path: 'requests/:id',
+      name: 'requests',
+      component: Requests,
     }],
     meta: {
       requiresAuth: true,

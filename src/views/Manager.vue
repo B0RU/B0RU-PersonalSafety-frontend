@@ -20,8 +20,8 @@ export default {
   data() {
     return {
       managerActions: {
-        Requests: { url: 'requests', value: 'Requests' },
-        Events: { url: 'events', value: 'Events' },
+        Requests: { url: '/manager/requests', value: 'Requests' },
+        Events: { url: '/manager/events', value: 'Events' },
       },
     };
   },

@@ -21,8 +21,8 @@ export default {
   data() {
     return {
       adminActions: {
-        Requests: { url: 'requests', value: 'Requests' },
-        Events: { url: 'events', value: 'Events' },
+        Requests: { url: '/admin/requests', value: 'Requests' },
+        Events: { url: '/admin/events', value: 'Events' },
       },
       coreActions: {
         'Register Agent': { url: '/admin/register-agent', value: 'Register Agent' },

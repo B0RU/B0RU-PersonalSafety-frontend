@@ -16,7 +16,7 @@
             {{ department.authorityTypeName }}
             <button class="departmentTable-firstTable_table__header__location">
                 <a
-                :href="`https://maps.google.com?q=loc:${department.departmentLocationLatitude}+${department.departmentLocationLongitude}`"
+                :href="`https://maps.google.com?q=loc:${department.latitude}+${department.longitude}`"
                 target="_blank"><b-icon icon="map" aria-hidden="true"></b-icon></a>
             </button>
           </h1>

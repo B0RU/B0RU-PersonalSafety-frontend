@@ -42,7 +42,7 @@
             v-b-popover.hover.right="`${department.rescuersEmails}`"
             title="Rescuers"
           >View Rescuers</div>
-          <router-link :to="`/manager/requests/${department.id}`">
+          <router-link :to="`requests/${department.id}`">
             <div class="departmentTable-firstTable_table__getstart">Activate</div>
           </router-link>
         </li>

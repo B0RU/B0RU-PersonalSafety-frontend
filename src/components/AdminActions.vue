@@ -1,53 +1,72 @@
 <template>
-  <div class="mainActions">
+  <div class='mainActions'>
     <h3>Dashboard</h3>
-    <p class="subhead">Manage Entity</p>
-    <b-overlay :show="status" opacity="1" variant="transparent" spinner-variant="primary">
-    <div class="departments">
-      <ul class="departmentTable-firstTable">
-        <li
-          class="departmentTable-firstTable_table"
-          v-for="department in getDepartments"
-          :key="department.departmentId"
-        >
-          <h1 class="departmentTable-firstTable_table__header">
-            {{ department.distributionName }}
-            <br />
-            {{ department.authorityTypeName }}
-            <button class="departmentTable-firstTable_table__header__location">
+    <p class='subhead'>Manage Entity</p>
+    <b-overlay :show='status' opacity='1' variant='transparent' spinner-variant='primary'>
+      <div class='departments'>
+        <ul class='departmentTable-firstTable'>
+          <li
+            class='departmentTable-firstTable_table'
+            v-for='department in getDepartments'
+            :key='department.departmentId'
+          >
+            <h1 class='departmentTable-firstTable_table__header'>
+              {{ department.distributionName }}
+              <br />
+              {{ department.authorityTypeName }}
+              <button
+                class='departmentTable-firstTable_table__header__location'
+              >
                 <a
-                :href="`https://maps.google.com?q=loc:${department.latitude}+${department.longitude}`"
-                target="_blank"><b-icon icon="map" aria-hidden="true"></b-icon></a>
-            </button>
-          </h1>
-          <ul class="departmentTable-firstTable_table__department">
-            <li>
-              <span>longitude</span>
-              <br />
-              <span>{{ department.longitude }}</span>
-            </li>
-            <li>
-              <span>latitude</span>
-              <br />
-              <span>{{ department.latitude }}</span>
-            </li>
-          </ul>
-          <div
-            class="departmentTable-firstTable_table__getstart"
-            v-b-popover.hover.right="`${department.agentsEmails}`"
-            title="Agents"
-          >View Agents</div>
-          <div
-            class="departmentTable-firstTable_table__getstart"
-            v-b-popover.hover.right="`${department.rescuersEmails}`"
-            title="Rescuers"
-          >View Rescuers</div>
-          <router-link :to="`requests/${department.id}`">
-            <div class="departmentTable-firstTable_table__getstart">Activate</div>
-          </router-link>
-        </li>
-      </ul>
-    </div>
+                  :href='`https://maps.google.com?q=loc:${department.latitude}+${department.longitude}`'
+                  target='_blank'
+                >
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='10'
+                    height='15'
+                    viewBox='0 0 16 20'>
+                    <path
+                      class='pin'
+                      d='M78.625,0a8.061,8.061,0,0,0-8.052,8.052c0,
+                      5.51,7.206,13.6,7.513,13.941a.725.725,0,0,0,
+                      1.079,0c.307-.342,7.513-8.431,7.513-13.941A8.062,
+                      8.062,0,0,0,78.625,0Zm0,12.1a4.051,4.051,0,1,1,4.051-4.051A4.056,
+                      4.056,0,0,1,78.625,12.1Z'
+                      transform='translate(-70.573)'
+                    />
+                  </svg>
+                </a>
+              </button>
+            </h1>
+            <ul class='departmentTable-firstTable_table__department'>
+              <li>
+                <span>longitude</span>
+                <br />
+                <span>{{ department.longitude }}</span>
+              </li>
+              <li>
+                <span>latitude</span>
+                <br />
+                <span>{{ department.latitude }}</span>
+              </li>
+            </ul>
+            <div
+              class='departmentTable-firstTable_table__getstart'
+              v-b-popover.hover.right='`${department.agentsEmails}`'
+              title='Agents'
+            >View Agents</div>
+            <div
+              class='departmentTable-firstTable_table__getstart'
+              v-b-popover.hover.right='`${department.rescuersEmails}`'
+              title='Rescuers'
+            >View Rescuers</div>
+            <router-link :to='`requests/${department.id}`'>
+              <div class='departmentTable-firstTable_table__getstart'>Activate</div>
+            </router-link>
+          </li>
+        </ul>
+      </div>
     </b-overlay>
   </div>
 </template>
@@ -70,12 +89,16 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 $h1color: #6e768d;
 $h3color: #b4bdc6;
 $widthoftable: 28%;
 $bgctables: #ffffff;
 $bgfontcolor: #717787;
+
+.pin{
+  fill: #ffffff;
+}
 
 .mainActions {
   display: block;
@@ -110,8 +133,8 @@ $bgfontcolor: #717787;
 
     &_table {
       vertical-align: middle;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       width: $widthoftable;
       background-color: $bgctables;
       display: inline-block;
@@ -147,7 +170,7 @@ $bgfontcolor: #717787;
       &:after {
         @media screen and (max-width: 767px) {
           display: table;
-          content: "";
+          content: '';
           clear: both;
         }
       }
@@ -171,18 +194,18 @@ $bgfontcolor: #717787;
         padding-top: 10px;
         color: black;
         text-align: left;
-        &__location{
-            background-color: #293147;
-            border: none;
-            border-radius: 5px;
-            float: right;
+        &__location {
+          background-color: #293147;
+          border: none;
+          border-radius: 5px;
+          float: right;
+          color: white;
+          a:link {
             color: white;
-            a:link {
-                color: white;
-            }
-            a:visited {
-                color: white;
-            }
+          }
+          a:visited {
+            color: white;
+          }
         }
       }
 
@@ -269,7 +292,7 @@ $bgfontcolor: #717787;
           margin: 10px auto;
         }
       }
-        &__getstart:nth-child(1){
+      &__getstart:nth-child(1) {
         background-color: green;
         margin-top: 15px;
       }

@@ -1,7 +1,7 @@
 <template>
   <div class="mainActions">
-    <h3>Register Agent</h3>
-    <p class="subhead">Enter the new Agent's Account Details</p>
+    <h3>Register Manager</h3>
+    <p class="subhead">Enter the new Manager's Account Details</p>
     <b-container fluid class="register">
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
         <div class="name">
@@ -14,7 +14,7 @@
                 v-model="firstName"
                 id="firstName"
                 size="md"
-                placeholder="Type Rescuer First Name"
+                placeholder="Type Manager First Name"
                 type="text"
                 required
               ></b-form-input>
@@ -29,7 +29,7 @@
                 v-model="lastName"
                 id="lastName"
                 size="md"
-                placeholder="Type Rescuer Last Name"
+                placeholder="Type Manager Last Name"
                 type="text"
                 required
               ></b-form-input>
@@ -46,7 +46,7 @@
                 v-model="form.email"
                 id="email"
                 size="md"
-                placeholder="Type Rescuer Email"
+                placeholder="Type Manager Email"
                 type="email"
                 required
               ></b-form-input>
@@ -84,11 +84,10 @@
               <label class="label">Distribution</label>
             </b-col>
             <b-col sm="14" style="margin-left:15px">
-              <b-button>Select Distribution</b-button>
+              <b-button @click="$refs.selectDistribution.openModal()">Select Distribution</b-button>
             </b-col>
           </b-col>
         </div>
-        <div>{{getMessages}}</div>
         <div class="form-btns">
           <div style="margin:0 auto;">
             <b-button type="submit">Submit</b-button>
@@ -96,13 +95,41 @@
           </div>
         </div>
       </b-form>
+      <div class="error-message">{{getMessages}}</div>
     </b-container>
+    <modal-component ref="selectDistribution">
+      <template v-slot:header>
+        <h3 class="modal-name">Assign Manager to distribution</h3>
+      </template>
+      <template v-slot:body>
+        <label class="label">distribution:</label>
+        <b-dropdown :text="modal.distribution" class="modal-dropdown" v-model="modal.distribution">
+          <b-dropdown-item v-for="distribution in distributions"
+          :key="distribution.id"
+          @click="modal.distribution = distribution.value + ' ' + distribution.typeName; form.distributionId = distribution.id">
+          {{distribution.value + ' ' + distribution.typeName}}
+          </b-dropdown-item>
+        </b-dropdown>
+      </template>
+      <template v-slot:footer>
+        <div @click="$refs.selectDistribution.closeModal()">
+        <new-button  action="confirm" class="modalbtn"></new-button>
+        </div>
+      </template>
+    </modal-component>
   </div>
 </template>
 
 <script>
+import modalComponent from './modelComponent.vue';
+import newButton from './newButton.vue';
+
 export default {
-  name: 'RegisterRescuer',
+  name: 'RegisterManager',
+  components: {
+    modalComponent,
+    newButton,
+  },
   data() {
     return {
       firstName: '',
@@ -111,17 +138,22 @@ export default {
       show: true,
       isLoading: false,
       passwordLength: 15,
+      modal: {
+        distribution: 'Select Distribution from below',
+      },
       form: {
         fullName: '',
         email: '',
         password: '',
-        existingDepartmentId: '',
-        authorityType: '',
-        distributionId: '',
-        departmentLongitude: '',
-        departmentLatitude: '',
+        distributionId: 0,
       },
     };
+  },
+  created() {
+    this.$store.dispatch('register/getDistributions');
+  },
+  destroyed() {
+    this.$store.state.register.message = '';
   },
   mounted() {
     this.generatePassword();
@@ -133,12 +165,15 @@ export default {
     getMessages() {
       return this.$store.state.register.message;
     },
+    distributions() {
+      return this.$store.state.register.distributions;
+    },
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      // this.$store.dispatch('register/registerAgent', this.form);
       this.form.fullName = `${this.firstName} ${this.lastName}`;
+      this.$store.dispatch('register/registerManager', this.form);
       console.log(this.form);
     },
     onReset(evt) {
@@ -197,6 +232,9 @@ button {
   margin-right: 1rem;
   }
 }
+.modal-dropdown{
+  margin-bottom: 15px;
+}
 .label {
   margin-bottom: 1rem;
   float: left;
@@ -224,5 +262,17 @@ button {
 .form-btns {
     margin: 0 auto;
     display: flex;
-    margin-top: 40px;}
+    margin-top: 40px;
+}
+.modal-name{
+  margin: 0 auto;
+  color: gray;
+}
+.modalbtn{
+    background: #FF6584;
+    width: 20%;
+    margin: 0 auto;
+    height: 2rem;
+    line-height: 10px;
+}
 </style>

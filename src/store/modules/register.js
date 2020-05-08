@@ -19,7 +19,8 @@ export default {
     },
     reg_error(state, errors) {
       state.status = 'error';
-      state.message = errors;
+      // eslint-disable-next-line prefer-destructuring
+      state.message = errors.messages[0];
     },
     getCities_success(state, cities) {
       state.cities = cities;
@@ -31,6 +32,21 @@ export default {
       return new Promise((resolve, reject) => {
         commit('reg_request');
         adminService.RegisterAgent(personnel)
+          .then((res) => {
+            const response = res.data;
+            commit('reg_success', response);
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('reg_error', err.response.data);
+            reject(err);
+          });
+      });
+    },
+    registerManager({ commit }, manager) {
+      return new Promise((resolve, reject) => {
+        commit('reg_request');
+        adminService.RegisterManager(manager)
           .then((res) => {
             const response = res.data;
             commit('reg_success', response);

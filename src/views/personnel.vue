@@ -107,7 +107,7 @@ export default {
       this.handleSubmit();
     },
     handleSubmit() {
-      this.acceptRequest(this.rescuer);
+      this.acceptRequest(this.rescuer.requestId, this.rescuer.rescuerEmail);
     },
   },
   computed: {

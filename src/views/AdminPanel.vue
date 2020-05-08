@@ -37,10 +37,14 @@ export default {
   },
   created() {
     this.getDepartments();
+    this.getDistributions();
   },
   methods: {
     getDepartments() {
       this.$store.dispatch('manager/getDepartments');
+    },
+    getDistributions() {
+      this.$store.dispatch('register/getDistributionsCities');
     },
   },
 };

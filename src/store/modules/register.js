@@ -7,6 +7,7 @@ export default {
     message: '',
     status: '',
     cities: {},
+    distributions: {},
   },
   mutations: {
     reg_request(state) {
@@ -24,6 +25,10 @@ export default {
     },
     getCities_success(state, cities) {
       state.cities = cities;
+      state.status = 'success';
+    },
+    getDistributions_success(state, distributions) {
+      state.distributions = distributions;
       state.status = 'success';
     },
   },
@@ -106,6 +111,21 @@ export default {
           .then((res) => {
             const cities = res.data.result;
             commit('getCities_success', cities);
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('reg_error', err);
+            reject(err);
+          });
+      });
+    },
+    getDistributions({ commit }) {
+      return new Promise((resolve, reject) => {
+        commit('reg_request');
+        adminService.GetDistributionNodes()
+          .then((res) => {
+            const distributions = res.data.result;
+            commit('getDistributions_success', distributions);
             resolve(res);
           })
           .catch((err) => {

@@ -72,4 +72,11 @@ body {
   color: white;
   cursor: pointer;
 }
+.btn-secondary.dropdown-toggle{
+    background: none;
+    border: none;
+    color: gray;
+    border-radius: 7px;
+    box-shadow: 0px 7px 7px -2px #888888;
+}
 </style>

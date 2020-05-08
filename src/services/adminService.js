@@ -13,6 +13,12 @@ export default {
   GetDistributionTree() {
     return axios.get('/api/Admin/Management/GetDistributionTree');
   },
+  GetDistributionNodes() {
+    return axios.get('/api/Admin/Management/GetDistributionNodes');
+  },
+  GetDistributionCities() {
+    return axios.get('/api/Admin/Management/GetDistributionCities');
+  },
   AddNewDistribution(distribution) {
     return axios.post('/api/Admin/Management/AddNewDistribution', distribution);
   }, // {"parentId": 0,"value": "string"}

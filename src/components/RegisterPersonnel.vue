@@ -14,7 +14,7 @@
                 v-model="firstName"
                 id="firstName"
                 size="md"
-                placeholder="Type Rescuer First Name"
+                placeholder="Type Personnel First Name"
                 type="text"
                 required
               ></b-form-input>
@@ -29,7 +29,7 @@
                 v-model="lastName"
                 id="lastName"
                 size="md"
-                placeholder="Type Rescuer Last Name"
+                placeholder="Type Personnel Last Name"
                 type="text"
                 required
               ></b-form-input>
@@ -46,7 +46,7 @@
                 v-model="form.email"
                 id="email"
                 size="md"
-                placeholder="Type Rescuer Email"
+                placeholder="Type Personnel Email"
                 type="email"
                 required
               ></b-form-input>
@@ -89,7 +89,6 @@
             </b-col>
           </b-col>
         </div>
-        <div>{{getMessages}}</div>
         <div class="form-btns">
           <div style="margin:0 auto;">
             <b-button type="submit">Submit</b-button>
@@ -97,6 +96,7 @@
           </div>
         </div>
       </b-form>
+      <div class="error-message">{{getMessages}}</div>
     </b-container>
     <modal-component ref="newDepartment">
       <template v-slot:header>
@@ -175,7 +175,7 @@ import modalComponent from './modelComponent.vue';
 import newButton from './newButton.vue';
 
 export default {
-  name: 'RegisterRescuer',
+  name: 'RegisterPersonnel',
   components: { modalComponent, newButton },
   data() {
     return {
@@ -229,11 +229,14 @@ export default {
       return this.$store.state.manager.departments;
     },
   },
+  destroyed() {
+    this.$store.state.register.message = '';
+  },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      // this.$store.dispatch('register/registerAgent', this.form);
       this.form.fullName = `${this.firstName} ${this.lastName}`;
+      this.$store.dispatch('register/registerPersonnel', this.form);
       console.log(this.form);
     },
     onReset(evt) {

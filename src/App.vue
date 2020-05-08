@@ -79,4 +79,9 @@ body {
     border-radius: 7px;
     box-shadow: 0px 7px 7px -2px #888888;
 }
+.error-message{
+  color: red;
+  width: 30%;
+  margin: 0 auto;
+}
 </style>

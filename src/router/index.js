@@ -7,6 +7,7 @@ import AdminPanel from '../views/AdminPanel.vue';
 import RegisterPersonnel from '../components/RegisterPersonnel.vue';
 import RegisterManager from '../components/RegisterManager.vue';
 import AdminActions from '../components/AdminActions.vue';
+import RegionalDistribution from '../components/RegionalDistribution.vue';
 import ManagerPanel from '../views/Manager.vue';
 import Personnel from '../views/personnel.vue';
 import RegisterRescuer from '../views/RegisterRescuer.vue';
@@ -44,8 +45,12 @@ const routes = [
       component: AdminActions,
     }, {
       path: 'requests/:id',
-      name: 'requests',
+      name: 'AdminRequests',
       component: Requests,
+    }, {
+      path: 'regional-distribution',
+      name: 'regionalDistribution',
+      component: RegionalDistribution,
     }],
     meta: {
       requiresAuth: true,
@@ -60,7 +65,7 @@ const routes = [
       component: AdminActions,
     }, {
       path: 'requests/:id',
-      name: 'requests',
+      name: 'managerRequests',
       component: Requests,
     }],
     meta: {

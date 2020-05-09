@@ -149,9 +149,6 @@ export default {
       },
     };
   },
-  created() {
-    this.$store.dispatch('register/getDistributions');
-  },
   destroyed() {
     this.$store.state.register.message = '';
   },

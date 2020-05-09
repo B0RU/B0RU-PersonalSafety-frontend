@@ -36,6 +36,7 @@ export default {
     sideActions,
   },
   created() {
+    this.$store.dispatch('register/getDistributions');
     this.getDepartments();
     this.getDistributions();
   },

@@ -3,7 +3,7 @@
     <div class="nav">
      <router-link :to="{name: 'Home'}"> <div class="logo">Personal Safety</div> </router-link>
      <span v-if="isLoggedIn"><div class="logIn-Out" @click="logout">LOGOUT</div></span>
-     <router-link class="logIn-Out" :to="{name: 'login'}" v-else> <div >LOGIN</div></router-link>
+     <router-link :to="{name: 'login'}" v-else> <div class="logIn-Out">LOGIN</div></router-link>
      </div>
     <router-view/>
   </div>
@@ -42,22 +42,26 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
+  height: 100%;
 }
 .nav{
-  display: flow-root;
+  width: 100%;
+  display: inline-block;
+  background-color: #5e657a;
 }
 body {
-  background: url("./assets/LOGOextract.png"), linear-gradient(#3C4357, #46548B) no-repeat center center fixed;
-  background-size: cover;
+  background-color: #3C4357;
   font-size: 16px;
   font-family: 'Lato', sans-serif;
   font-weight: 300;
   margin: 0;
   color: #666;
+  height: 100%;
+  padding: 0px;
 }
 .logo{
   font-family: 'Berlin Sans FB Regular';
-  font-size: 45px;
+  font-size: 2rem;
   float: left;
   color: white;
   padding-left: 15px;

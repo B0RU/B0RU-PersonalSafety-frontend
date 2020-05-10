@@ -1,5 +1,5 @@
 <template>
- <div>
+ <b-container fluid class="home">
    <div class="middle">
      <ul>
        <li>Support Us</li>
@@ -10,11 +10,11 @@
    <div class="subheader">Rescue anyone, anytime, with any device.</div>
    <div><img src="../assets/EgyptLogo.png" alt="egypt"></div>
     <div class="footer">
-       <div class="left card"> <span class="dot"></span> 12 <span class="caption"> Cities</span> </div>
-       <div class="center card"><span class="dot"></span> 100,000 <span class="caption"> Users</span></div>
-       <div class="right card"> <span class="dot"></span> 63 <span class="caption"> Solved Cases </span></div>
+       <div class="left card"> <span class="dot"></span> 12 <br><span class="caption"> Cities</span> </div>
+       <div class="center card"><span class="dot"></span> 100,000 <br><span class="caption"> Users</span></div>
+       <div class="right card"> <span class="dot"></span> 63 <br><span class="caption"> Solved Cases </span></div>
    </div>
- </div>
+ </b-container>
 </template>
 
 <script>
@@ -25,16 +25,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .logo{
-//   font-family: 'Berlin Sans FB Regular';
-//   font-size: 45px;
-//   float: left;
-//   color: white;
-//   padding-left: 15px;
-// }
+.home{
+  background: url("../assets/LOGOextract.png"), linear-gradient(#3C4357, #46548B) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+  position: fixed;
+}
 .middle{
-  margin: 18px auto;
-  width: 600px;
+  margin: 0 auto;
+  width: 50%;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
@@ -44,53 +43,40 @@ export default {
 ul{
   font-family: 'Roboto', sans-serif;
   list-style-type: none;
-  margin: 0 auto;
   overflow: hidden;
-  padding: 0;
   display: flex;
+  padding: 0;
 }
 li{
-  color: rgb(0, 0, 0);
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  margin: 0px 38px;
-  font-size: 22px;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 22px;
+    margin: 0 auto;
 }
-// .login{
-//   float: right;
-//   font-family: 'Roboto', sans-serif;
-//   font-size: 20px;
-//   margin-top: 25px;
-//   margin-right: 75px;
-//   text-decoration: none;
-//   color: white;
-// }
 .subheader{
   color: white;
   font-size: 40px;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-weight:600;
-  margin-top: 20px ;
 }
 img{
   height: 300px;
   width: 300px;
-  margin-top: 50px;
 }
 .footer{
+  width: 100%;
   display: inline-flex;
 }
 .card {
-  width: 250px;
-  height: 100px;
-  background-color: #46548B;
-  opacity: 90%;
-  color: white;
-  margin: 0 100px;
-  font-size: 35px;
-  text-align: left;
-  display: inline;
+    background-color: #46548B;
+    opacity: 90%;
+    color: white;
+    font-size: 35px;
+    margin: 0 auto;
+    padding: 10px;
+    text-align: left;
+    display: inline;
 }
 .dot{
   height: 25px;
@@ -119,9 +105,8 @@ img{
   }
 }
 .caption{
-  position: relative;
-  font-size: 20px;
-  margin-top: 10px;
+    font-size: 20px;
+    margin-left: 50px;
 }
 
 </style>

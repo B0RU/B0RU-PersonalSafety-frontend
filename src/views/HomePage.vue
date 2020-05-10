@@ -30,6 +30,7 @@ export default {
   background-size: cover;
   height: 100%;
   position: fixed;
+  overflow-y: scroll;
 }
 .middle{
   margin: 0 auto;

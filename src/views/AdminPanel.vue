@@ -69,4 +69,18 @@ export default {
   height: 500px;
   border-radius: 15px;
 }
+.table {
+    width: 85%;
+    margin: 0 auto;
+}
+.table thead th {
+    border-bottom: 2px solid gray;
+    color: gray;
+    border-top: none ;
+}
+.table td {
+    border-top: none ;
+    border-bottom: 1px solid gray;
+    color: white;
+}
 </style>

@@ -134,5 +134,20 @@ export default {
           });
       });
     },
+    renameDistribution({ commit }, distribution) {
+      return new Promise((resolve, reject) => {
+        commit('reg_request');
+        adminService.RenameDistribution(distribution)
+          .then((res) => {
+            const messages = res.data;
+            commit('reg_success', messages);
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('reg_error', err);
+            reject(err);
+          });
+      });
+    },
   },
 };

@@ -1,26 +1,52 @@
 <template>
-      <b-table :fields="fields" :items="items" caption-top>
-          <template v-slot:table-caption>
-                  <b> bar</b>
-          </template>
+  <div>
+      <b-table :fields="fields" :items="items">
           <template v-slot:cell(Name)="data">
               <h5 @click="getchildren(data.item.id)" class="district">{{ data.item.value }} </h5>
           </template>
           <template v-slot:cell(Type)="data">
               <h5>{{ data.item.typeName }} </h5>
           </template>
-          <template v-slot:cell(btns)>
+          <template v-slot:cell(btns)="data">
               <b-button class="table-btns"><b-icon-plus></b-icon-plus></b-button>
-              <b-button class="table-btns"><b-icon-pencil></b-icon-pencil></b-button>
+              <b-button class="table-btns" @click="renameModal(data.item.id)"><b-icon-pencil></b-icon-pencil></b-button>
           </template>
       </b-table>
+      <modal-component ref="renameDistribution">
+      <template v-slot:header>
+        <h3 class="modal-name">Rename Distribution</h3>
+      </template>
+      <template v-slot:body>
+        <b-overlay :show="status" opacity="1" variant="transparent" spinner-variant="primary">
+        <input required type="text" v-model="renamedDistribution.value"
+        name="distribution"
+        placeholder="Rename selected Distribution"
+        class="modal-input">
+        </b-overlay>
+        <div>{{messages}}</div>
+      </template>
+      <template v-slot:footer>
+        <div @click="renameDistribution()">
+        <new-button  action="confirm" class="modalbtn"></new-button>
+        </div>
+      </template>
+    </modal-component>
+  </div>
 </template>
 
 <script>
+import modalComponent from './modelComponent.vue';
+import newButton from './newButton.vue';
+
 export default {
+  components: {
+    modalComponent,
+    newButton,
+  },
   data() {
     return {
-      fields: ['Name', 'Type', 'Number of Children', { key: 'btns', label: ' ' }],
+      show: false,
+      fields: ['Name', 'Type', { key: 'btns', label: ' ' }],
       items: [
         {
           value: 'Egypt',
@@ -30,12 +56,25 @@ export default {
           id: 1,
         },
       ],
+      renamedDistribution: {
+        id: null,
+        value: '',
+      },
     };
   },
   computed: {
     distributions() {
       return this.$store.state.register.distributions;
     },
+    status() {
+      return this.$store.state.register.status === 'loading';
+    },
+    messages() {
+      return this.$store.state.register.message;
+    },
+  },
+  destroyed() {
+    this.$store.state.register.message = '';
   },
   methods: {
     getchildren(id) {
@@ -43,30 +82,52 @@ export default {
       const childs = distributions.filter((item) => item.parentId === id);
       this.items = childs;
     },
+    renameDistribution() {
+      // this.$store.dispatch('register/renameDistribution', this.renamedDistribution);
+      console.log(this.renamedDistribution);
+    },
+    renameModal(id) {
+      this.renamedDistribution.id = id;
+      this.renamedDistribution.value = '';
+      this.$refs.renameDistribution.openModal();
+    },
   },
 };
 </script>
 
-<style lang='scss'>
-.table {
-    width: 90%;
-    margin: 0 auto;
+<style lang='scss' scoped>
+.district{
+    cursor: pointer;
 }
-.table thead th {
-    border-bottom: 2px solid gray;
-    color: gray;
-    border-top: none ;
-}
-.table td {
-    border-top: none ;
-    border-bottom: 1px solid gray;
+.label {
+  margin-bottom: 1rem;
+  float: left;
+  color: gray;
 }
 .table-btns{
+    float: right;
     margin-right: 10px;
     background-color: gray;
     padding: 0.3rem;
 }
-.district{
-    cursor: pointer;
+.modal-name{
+  margin: 0 auto;
+  color: gray;
+}
+.modalbtn{
+    background: #FF6584;
+    width: 20%;
+    margin: 0 auto;
+    height: 2rem;
+    line-height: 10px;
+}
+.modal-input{
+  background: none;
+  border: none;
+  color: gray;
+  border-radius: 7px;
+  box-shadow: 0px 7px 7px -2px #888888;
+  padding: 10px;
+  width: 100%;
 }
 </style>

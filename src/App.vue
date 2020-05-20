@@ -2,8 +2,7 @@
   <div id="app">
     <div class="nav">
      <router-link :to="{name: 'Home'}"> <div class="logo">Personal Safety</div> </router-link>
-     <span v-if="isLoggedIn"><div class="logIn-Out" @click="logout">LOGOUT</div></span>
-     <router-link :to="{name: 'login'}" v-else> <div class="logIn-Out">LOGIN</div></router-link>
+     <signing-box></signing-box>
      </div>
     <router-view/>
   </div>
@@ -11,9 +10,13 @@
 
 <script>
 import Axios from 'axios';
+import signingBox from './components/signingBox.vue';
 
 export default {
   name: 'App',
+  components: {
+    signingBox,
+  },
   created() {
     Axios.interceptors.response.use(undefined, (err) => new Promise(() => {
       if (err.status === 401) {
@@ -21,16 +24,6 @@ export default {
       }
       throw err;
     }));
-  },
-  computed: {
-    isLoggedIn() { return this.$store.getters.isLoggedIn; },
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch('logout')
-        .then(() => this.$router.push('/login'))
-        .catch((err) => console.log(err));
-    },
   },
 };
 </script>
@@ -65,16 +58,6 @@ body {
   float: left;
   color: white;
   padding-left: 15px;
-}
-.logIn-Out{
-  float: right;
-  font-family: 'Roboto', sans-serif;
-  font-size: 20px;
-  margin-top: 25px;
-  margin-right: 75px;
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
 }
 .btn-secondary.dropdown-toggle{
     background: none;

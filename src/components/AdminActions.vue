@@ -62,7 +62,7 @@
               title='Rescuers'
             >View Rescuers</div>
             <router-link :to='`requests/${department.id}`'>
-              <div class='departmentTable-firstTable_table__getstart'>Activate</div>
+              <div class='departmentTable-firstTable_table__getstart'>Requests</div>
             </router-link>
           </li>
         </ul>
@@ -293,7 +293,7 @@ $bgfontcolor: #717787;
         }
       }
       &__getstart:nth-child(1) {
-        background-color: green;
+        background-color: #16B68F;
         margin-top: 15px;
       }
     }

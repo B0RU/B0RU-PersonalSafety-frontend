@@ -134,13 +134,30 @@ export default {
           });
       });
     },
-    renameDistribution({ commit }, distribution) {
+    renameDistribution({ commit, dispatch }, distribution) {
       return new Promise((resolve, reject) => {
         commit('reg_request');
         adminService.RenameDistribution(distribution)
           .then((res) => {
             const messages = res.data;
             commit('reg_success', messages);
+            dispatch('getDistributions');
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('reg_error', err);
+            reject(err);
+          });
+      });
+    },
+    addDistribution({ commit, dispatch }, distribution) {
+      return new Promise((resolve, reject) => {
+        commit('reg_request');
+        adminService.AddNewDistribution(distribution)
+          .then((res) => {
+            const messages = res.data;
+            commit('reg_success', messages);
+            dispatch('getDistributions');
             resolve(res);
           })
           .catch((err) => {

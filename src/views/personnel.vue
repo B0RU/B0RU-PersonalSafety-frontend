@@ -38,6 +38,7 @@
       :value="`${rescuer.userEmail}`">{{rescuer.userEmail}}</b-form-select-option>
     </b-form-select>
     </form>
+    <p>{{messages}}</p>
   </b-modal>
   <a class="float">
     <router-link :to="{name: 'RegisterRescuer'}">
@@ -116,6 +117,9 @@ export default {
     },
     Rescuers() {
       return this.$store.state.personnel.rescuers;
+    },
+    messages() {
+      return this.$store.state.personnel.message;
     },
   },
 };

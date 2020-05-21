@@ -83,8 +83,8 @@ export default {
       this.items = childs;
     },
     renameDistribution() {
-      // this.$store.dispatch('register/renameDistribution', this.renamedDistribution);
-      console.log(this.renamedDistribution);
+      this.$store.dispatch('register/renameDistribution', this.renamedDistribution);
+      // console.log(this.renamedDistribution);
     },
     renameModal(id) {
       this.renamedDistribution.id = id;

@@ -28,7 +28,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -41,16 +41,6 @@ export default {
   width: 100%;
   display: inline-block;
   background-color: #5e657a;
-}
-body {
-  background-color: #3C4357;
-  font-size: 16px;
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  margin: 0;
-  color: #666;
-  height: 100%;
-  padding: 0px;
 }
 .logo{
   font-family: 'Berlin Sans FB Regular';
@@ -70,5 +60,28 @@ body {
   color: red;
   width: 30%;
   margin: 0 auto;
+}
+body {
+  background-color: #3C4357;
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  margin: 0;
+  color: #666;
+  height: 100%;
+  padding: 0px;
+
+    @media screen and (max-width: 960px){
+     font-size: 80%;
+   }
+     @media screen and (max-width: 776px){
+     font-size: 70%;
+   }
+     @media screen and (max-width: 496px){
+     font-size: 50%;
+   }
+     @media screen and (max-width: 320px){
+     font-size: 40%;
+   }
 }
 </style>

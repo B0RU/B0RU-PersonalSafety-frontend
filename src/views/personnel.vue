@@ -96,8 +96,8 @@ export default {
     getRescuers() {
       this.$store.dispatch('personnel/getResquers');
     },
-    acceptRequest(requestId, rescuerEmail) {
-      this.$store.dispatch('personnel/acceptRequest', requestId, rescuerEmail)
+    acceptRequest(rescuer) {
+      this.$store.dispatch('personnel/acceptRequest', rescuer)
         .then(() => this.getSOSRequests());
     },
     handleOk(bvModalEvt) {
@@ -107,7 +107,7 @@ export default {
       this.handleSubmit();
     },
     handleSubmit() {
-      this.acceptRequest(this.rescuer.requestId, this.rescuer.rescuerEmail);
+      this.acceptRequest(this.rescuer);
     },
   },
   computed: {
@@ -302,7 +302,7 @@ $bgfontcolor: #717787;
           font-size: 0.30em;
           letter-spacing: 0.04em;
           padding-left: 0.2em;
-          color: #71CE73;
+          color: #293147;
            @media screen and (max-width: 1068px){
            font-size: 0.25em;
           }
@@ -357,7 +357,7 @@ $bgfontcolor: #717787;
             display: inline-block;
             margin-right: 15px;
             color: white;
-            background-color: #74ce6a;
+            background-color: #293147;
             border-radius: 50%;
             width: 15px;
             height: 15px;
@@ -382,12 +382,12 @@ $bgfontcolor: #717787;
 
       &__getstart{
         color: white !important;
-        background-color: #71ce73;
+        background-color: #293147;
         margin-top: 30px;
         border-radius: 5px;
         cursor: pointer;
         padding: 15px;
-        box-shadow: 0px 3px 0px 0px rgba(102, 172, 100, 1);
+        box-shadow: 0px 3px 0px 0px #293147;
         letter-spacing: 0.07em;
         transition: all 0.4s ease;
 
@@ -416,7 +416,7 @@ $bgfontcolor: #717787;
 
         &:hover{
           transform: translateY(-10px);
-          box-shadow: 0px 40px 29px -19px rgba(102, 172, 100, 0.9);
+          box-shadow: 0px 40px 29px -19px #293147;
           @media screen and (max-width: 767px){
             transform: none;
             box-shadow: none;
@@ -424,7 +424,7 @@ $bgfontcolor: #717787;
         }
 
         &:active{
-          box-shadow: inset 0 0 10px 1px rgba(102, 165, 100, 1), 0px 40px 29px -19px rgba(102, 172, 100, 0.95);
+          box-shadow: inset 0 0 10px 1px #293147, 0px 40px 29px -19px #293147;
           transform: scale(0.95) translateY(-9px);
           @media screen and (max-width: 767px){
             transform: scale(0.95) translateY(0);
@@ -435,29 +435,29 @@ $bgfontcolor: #717787;
     }
   }
 }
-body{
-  font-family: 'Montserrat', sans-serif;
-  font-size: 100%;
-  background-color: #f0f4f7;
-  color: $bgfontcolor;
+// body{
+//   font-family: 'Montserrat', sans-serif;
+//   font-size: 100%;
+//   background-color: #f0f4f7;
+//   color: $bgfontcolor;
 
-  @media screen and (max-width: 960px){
-    font-size: 80%;
-  }
-    @media screen and (max-width: 776px){
-    font-size: 70%;
-  }
-    @media screen and (max-width: 496px){
-    font-size: 50%;
-  }
-    @media screen and (max-width: 320px){
-    font-size: 40%;
-  }
-}
+//   @media screen and (max-width: 960px){
+//     font-size: 80%;
+//   }
+//     @media screen and (max-width: 776px){
+//     font-size: 70%;
+//   }
+//     @media screen and (max-width: 496px){
+//     font-size: 50%;
+//   }
+//     @media screen and (max-width: 320px){
+//     font-size: 40%;
+//   }
+// }
 
-*{
-  padding:   0;
-  margin: 0;
-  box-sizing: border-box;
-}
+// *{
+//   padding:   0;
+//   margin: 0;
+//   box-sizing: border-box;
+// }
 </style>

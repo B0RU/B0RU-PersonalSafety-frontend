@@ -18,6 +18,10 @@ export default {
       state.Requests = Requests;
       state.status = 'success';
     },
+    acceptRequest_success(state, messages) {
+      state.status = 'success';
+      state.message = messages;
+    },
     get_error(state, errors) {
       state.status = 'error';
       state.message = errors;
@@ -51,10 +55,11 @@ export default {
       return new Promise((resolve, reject) => {
         agentService.AcceptSOSRequest(requestInfo.requestId, requestInfo.rescuerEmail)
           .then((res) => {
+            commit('acceptRequest_success', res.data.messages);
             resolve(res);
           })
           .catch((err) => {
-            commit('get_error');
+            commit('get_error', err);
             reject(err);
           });
       });

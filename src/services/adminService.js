@@ -23,7 +23,7 @@ export default {
     return axios.post('/api/Admin/Management/AddNewDistribution', distribution);
   }, // {"parentId": 0,"value": "string"}
   RenameDistribution(distribution) {
-    return axios.post('/api/Admin/Management/RenameDistribution', distribution);
+    return axios.put('/api/Admin/Management/RenameDistribution', distribution);
   }, // {"id": 0, "value": "string"}
   RetrieveTrackers() {
     return axios.get('/api/Admin/Technical/RetrieveTrackers');

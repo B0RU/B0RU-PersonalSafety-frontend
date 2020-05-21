@@ -8,7 +8,7 @@
               <h5>{{ data.item.typeName }} </h5>
           </template>
           <template v-slot:cell(btns)="data">
-              <b-button class="table-btns"><b-icon-plus></b-icon-plus></b-button>
+              <b-button class="table-btns" @click="addModal(data.item.id, data.item.value)"><b-icon-plus></b-icon-plus></b-button>
               <b-button class="table-btns" @click="renameModal(data.item.id)"><b-icon-pencil></b-icon-pencil></b-button>
           </template>
       </b-table>
@@ -23,10 +23,29 @@
         placeholder="Rename selected Distribution"
         class="modal-input">
         </b-overlay>
-        <div>{{messages}}</div>
+        <div style="color: red; margin: 0 auto;">{{messages}}</div>
       </template>
       <template v-slot:footer>
         <div @click="renameDistribution()">
+        <new-button  action="confirm" class="modalbtn"></new-button>
+        </div>
+      </template>
+    </modal-component>
+    <modal-component ref="addDistribution">
+      <template v-slot:header>
+        <h3 class="modal-name">add Distribution inside {{parentValue}}</h3>
+      </template>
+      <template v-slot:body>
+        <b-overlay :show="status" opacity="1" variant="transparent" spinner-variant="primary">
+        <input required autocomplete="off" type="text" v-model="addedDistribution.value"
+        name="distribution"
+        placeholder= "add New Distribution"
+        class="modal-input">
+        </b-overlay>
+        <div style="color: red; margin: 0 auto;">{{messages}}</div>
+      </template>
+      <template v-slot:footer>
+        <div @click="addDistribution()">
         <new-button  action="confirm" class="modalbtn"></new-button>
         </div>
       </template>
@@ -60,6 +79,11 @@ export default {
         id: null,
         value: '',
       },
+      addedDistribution: {
+        parentId: null,
+        value: '',
+      },
+      parentValue: '',
     };
   },
   computed: {
@@ -83,13 +107,25 @@ export default {
       this.items = childs;
     },
     renameDistribution() {
-      this.$store.dispatch('register/renameDistribution', this.renamedDistribution);
-      // console.log(this.renamedDistribution);
+      this.$store.dispatch('register/renameDistribution', this.renamedDistribution)
+        .then(() => { this.getchildren(null); });
     },
     renameModal(id) {
       this.renamedDistribution.id = id;
       this.renamedDistribution.value = '';
+      this.$store.state.register.message = '';
       this.$refs.renameDistribution.openModal();
+    },
+    addDistribution() {
+      this.$store.dispatch('register/addDistribution', this.addedDistribution);
+      console.log(this.addedDistribution);
+    },
+    addModal(id, parentValue) {
+      this.addedDistribution.parentId = id;
+      this.parentValue = parentValue;
+      this.addedDistribution.value = '';
+      this.$store.state.register.message = '';
+      this.$refs.addDistribution.openModal();
     },
   },
 };

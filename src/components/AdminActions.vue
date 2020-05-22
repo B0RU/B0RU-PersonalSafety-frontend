@@ -116,6 +116,10 @@ $bgfontcolor: #717787;
   &::-webkit-scrollbar {
     display: none;
   }
+  @media screen and (max-width: 496px) {
+    height: 300px;
+    overflow-y: auto;
+  }
 }
 .subhead {
   color: gray;

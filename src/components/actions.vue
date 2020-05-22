@@ -27,6 +27,9 @@ export default {
     padding: 20px 20px 20px 30px;
     color: gray;
     margin-bottom: 10px;
+    @media screen and (max-width: 496px) {
+      padding: 0.3rem;
+    }
 }
 ul{
   list-style-type: none;

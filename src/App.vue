@@ -48,6 +48,12 @@ export default {
   float: left;
   color: white;
   padding-left: 15px;
+  @media screen and (max-width: 320px) {
+    font-size: 1rem;
+  }
+  @media screen and (max-width: 496px) {
+    font-size: 1rem;
+  }
 }
 .btn-secondary.dropdown-toggle{
     background: none;

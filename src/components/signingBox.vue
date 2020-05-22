@@ -2,11 +2,11 @@
   <div>
     <div v-if="isLoggedIn">
       <div class="logIn-Out dropdown">
-       <span style="font-size: 1.1rem">
+       <span class="user-name">
            {{userName}} <b-icon-chevron-down></b-icon-chevron-down>
        </span>
         <br />
-       <span style="font-size: 1rem"> {{userRole}} </span>
+       <span class="user-role"> {{userRole}} </span>
        <div class="dropdown-content">
            <span style="color: gray; font-size: 0.9rem">logged In As:</span><br>
            <span style="font-size: 1.1rem">{{userEmail}}</span><br>
@@ -50,9 +50,8 @@ export default {
 .logIn-Out{
     float: right;
     font-family: "Roboto", sans-serif;
-    font-size: 20px;
     line-height: 1;
-    padding-right: 4%;
+    padding-right: 2%;
     text-align: left;
     text-decoration: none;
     color: white;
@@ -74,8 +73,20 @@ export default {
   }
 }
 
-
 .dropdown:hover .dropdown-content {
   display: block;
+}
+
+.user-name{
+  font-size: 1.1rem;
+  @media screen and (max-width: 496px) {
+    font-size: 50%;
+  }
+}
+.user-role{
+  font-size: 1rem;
+  @media screen and (max-width: 496px) {
+    font-size: 50%;
+  }
 }
 </style>

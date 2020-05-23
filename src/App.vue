@@ -68,7 +68,7 @@ export default {
   margin: 0 auto;
 }
 body {
-  background-color: #3C4357;
+  background-color: #293147;
   font-size: 16px;
   font-family: 'Lato', sans-serif;
   font-weight: 300;

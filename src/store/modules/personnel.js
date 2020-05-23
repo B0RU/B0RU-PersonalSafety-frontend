@@ -8,7 +8,7 @@ export default {
     status: '',
     rescuers: {},
     passwordMessages: {},
-    message: {},
+    message: '',
   },
   mutations: {
     get_request(state) {

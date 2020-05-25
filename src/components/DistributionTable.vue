@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import modalComponent from './modelComponent.vue';
+import modalComponent from './modalComponent.vue';
 import newButton from './newButton.vue';
 
 export default {

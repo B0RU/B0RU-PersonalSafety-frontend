@@ -45,8 +45,11 @@ export default {
       document.querySelector('body').classList.remove('overflow-hidden');
     },
     openModal() {
-      this.show = true;
-      document.querySelector('body').classList.add('overflow-hidden');
+      return new Promise((resolve) => {
+        this.show = true;
+        const overflow = document.querySelector('body').classList.add('overflow-hidden');
+        resolve(overflow);
+      });
     },
   },
 };

@@ -16,6 +16,7 @@ export default new Vuex.Store({
     messages: null,
     authenticationDetails: JSON.parse(localStorage.getItem('authenticationDetails')) || {},
     accountDetails: JSON.parse(localStorage.getItem('accountDetails')) || null,
+    location: {},
   },
   mutations: {
     login_request(state) {
@@ -43,6 +44,9 @@ export default new Vuex.Store({
       state.authenticationDetails = {};
       state.messages = null;
       state.statusCode = null;
+    },
+    updateLocation(state, location) {
+      state.location = location;
     },
   },
   actions: {

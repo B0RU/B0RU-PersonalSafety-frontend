@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       adminActions: {
-        Requests: { url: '/admin/requests', value: 'Requests' },
+        Requests: { url: '/admin/track-rescuers', value: 'Track Rescuers' },
         Events: { url: '/admin/events', value: 'Events' },
       },
       coreActions: {

@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       managerActions: {
-        Requests: { url: '/manager/requests', value: 'Requests' },
+        Requests: { url: '/manager/track-rescuers', value: 'Track Rescuers' },
         Events: { url: '/manager/events', value: 'Events' },
       },
     };

@@ -1,5 +1,5 @@
 <template>
-  <div class="mainActions">
+  <div class="mainActions" ref="main">
     <h3>Register Agent</h3>
     <p class="subhead">Enter the new Agent's Account Details</p>
     <b-container fluid class="register">
@@ -120,8 +120,7 @@
         <div class="location">
           <input type="number" v-model="modal.departmentLongitude" name="Longitude" placeholder="Longitude" class="modal-input">
           <input type="number" v-model="modal.departmentLatitude" name="Latitude" placeholder="Latitude" class="modal-input">
-          <button class="modal-input__btn">
-            <a :href="`https://maps.google.com?q=loc:${modal.cityName}`" target="_blank">
+          <button class="modal-input__btn" @click="testIt()">
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     width='10'
@@ -137,7 +136,6 @@
                       transform='translate(-70.573)'
                     />
                   </svg>
-            </a>
           </button>
         </div>
       </template>
@@ -171,8 +169,11 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import modalComponent from './modalComponent.vue';
 import newButton from './newButton.vue';
+import mapComponent from './MapComponent.vue';
+import store from '../store';
 
 export default {
   name: 'RegisterPersonnel',
@@ -207,8 +208,8 @@ export default {
         existingDepartmentId: 0,
         authorityType: null,
         distributionId: null,
-        departmentLongitude: 0,
-        departmentLatitude: 0,
+        departmentLongitude: null,
+        departmentLatitude: null,
       },
     };
   },
@@ -228,16 +229,31 @@ export default {
     departments() {
       return this.$store.state.manager.departments;
     },
+    departmentLocation() {
+      return this.$store.state.location;
+    },
   },
   destroyed() {
     this.$store.state.register.message = '';
   },
+  watch: {
+    departmentLocation(location) {
+      this.modal.departmentLongitude = location.lng;
+      this.modal.departmentLatitude = location.lat;
+      console.log(location);
+    },
+  },
   methods: {
+    testIt() {
+      const ComponentClass = Vue.extend(mapComponent);
+      const instance = new ComponentClass({ store });
+      instance.$mount();
+      this.$refs.main.appendChild(instance.$el);
+    },
     onSubmit(evt) {
       evt.preventDefault();
       this.form.fullName = `${this.firstName} ${this.lastName}`;
       this.$store.dispatch('register/registerPersonnel', this.form);
-      console.log(this.form);
     },
     onReset(evt) {
       evt.preventDefault();
@@ -277,6 +293,7 @@ export default {
       this.form.authorityType = +this.modal.authorityId;
       this.form.distributionId = +this.modal.cityId;
       this.$refs.newDepartment.closeModal();
+      console.log(this.form.departmentLongitude, this.form.departmentLatitude);
     },
   },
 };

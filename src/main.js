@@ -3,6 +3,8 @@ import Axios from 'axios';
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
+import * as VueGoogleMaps from 'vue2-google-maps';
+import VueGeolocation from 'vue-browser-geolocation';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -17,6 +19,13 @@ if (token) {
   Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
 
+Vue.use(VueGeolocation);
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyDGzxOwQoYqMYvEYUhrrTRn1GQ_ccWqRac',
+    libraries: 'places', // This is required if you use the Autocomplete plugin
+  },
+});
 new Vue({
   router,
   store,

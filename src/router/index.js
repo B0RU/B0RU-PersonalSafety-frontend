@@ -8,6 +8,7 @@ import RegisterPersonnel from '../components/RegisterPersonnel.vue';
 import RegisterManager from '../components/RegisterManager.vue';
 import AdminActions from '../components/AdminActions.vue';
 import RegionalDistribution from '../components/RegionalDistribution.vue';
+import trackingMap from '../components/trackingMap.vue';
 import ManagerPanel from '../views/Manager.vue';
 import Personnel from '../views/personnel.vue';
 import RegisterRescuer from '../views/RegisterRescuer.vue';
@@ -51,6 +52,10 @@ const routes = [
       path: 'regional-distribution',
       name: 'regionalDistribution',
       component: RegionalDistribution,
+    }, {
+      path: 'track-rescuers',
+      name: 'trackRescuers',
+      component: trackingMap,
     }],
     meta: {
       requiresAuth: true,
@@ -67,6 +72,10 @@ const routes = [
       path: 'requests/:id',
       name: 'managerRequests',
       component: Requests,
+    }, {
+      path: 'track-rescuers',
+      name: 'trackRescuers',
+      component: trackingMap,
     }],
     meta: {
       requiresAuth: true,

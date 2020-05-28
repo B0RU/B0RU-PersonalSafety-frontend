@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 <template>
   <div class='actions'>
     <ul>
@@ -21,10 +22,14 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.active{
+  background-color: white;
+  opacity: 0.6;
+}
 .actions{
     border-radius: 19px;
     background: #5E657A;
-    padding: 20px 20px 20px 30px;
+    padding: 20px 0px;
     color: gray;
     margin-bottom: 10px;
     @media screen and (max-width: 496px) {
@@ -39,8 +44,10 @@ ul{
 }
 li{
   cursor: pointer;
-  margin: 5px;
+  margin: 5px 0px;
   line-height: 1.8;
+  padding-left: 20px;
+  border-radius: 5px;
   a{
     color: gray;
     text-decoration: none;

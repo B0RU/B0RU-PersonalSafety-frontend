@@ -3,7 +3,7 @@
     <GmapCluster :grid-size="30">
         <GmapMarker v-for="department in departments" :key="department.departmentId"
             ref="departmentMarker"
-            :position="{lat: department.longitude, lng:department.latitude}"
+            :position="{lat: department.latitude, lng:department.longitude}"
             :icon='icons[department.authorityTypeName].icon'
         >
         </GmapMarker>
@@ -45,12 +45,6 @@ export default {
     };
   },
   created() {
-    this.$getLocation({})
-      .then((coordinates) => {
-        this.myCoordinates.lat = coordinates.lat;
-        this.myCoordinates.lng = coordinates.lng;
-      })
-      .catch((error) => console.log(error));
   },
   mounted() {
     this.$refs.trackingMap.$mapPromise.then((map) => {
@@ -63,13 +57,6 @@ export default {
     },
   },
   methods: {
-    handleDrag() {
-      const lat = this.$refs.departmentMarker.$markerObject.getPosition().lat();
-      const lng = this.$refs.departmentMarker.$markerObject.getPosition().lng();
-      this.myCoordinates.lat = lat;
-      this.myCoordinates.lng = lng;
-      console.log(lat, lng);
-    },
   },
 };
 </script>

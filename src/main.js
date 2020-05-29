@@ -8,9 +8,8 @@ import VueGeolocation from 'vue-browser-geolocation';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import location from './plugins/location-hub';
 
-Vue.use(BootstrapVue);
-Vue.use(BootstrapVueIcons);
 Vue.config.productionTip = false;
 Vue.prototype.$hostname = 'https://personalsafety.azurewebsites.net';
 Axios.defaults.baseURL = Vue.prototype.$hostname;
@@ -19,6 +18,9 @@ if (token) {
   Axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 }
 
+Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
+Vue.use(location);
 Vue.use(VueGeolocation);
 Vue.use(VueGoogleMaps, {
   load: {

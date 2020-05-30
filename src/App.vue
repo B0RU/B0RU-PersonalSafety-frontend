@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import Axios from 'axios';
+// import Axios from 'axios';
 import signingBox from './components/signingBox.vue';
 
 export default {
@@ -18,12 +18,22 @@ export default {
     signingBox,
   },
   created() {
-    Axios.interceptors.response.use(undefined, (err) => new Promise(() => {
-      if (err.status === 401) {
-        this.logout();
-      }
-      throw err;
-    }));
+    // Axios.interceptors.response.use((response) => {
+    //   console.log(response);
+    // }, (error) => {
+    //   if (error.message === 'Request failed with status code 400') {
+    //     Promise.reject(error);
+    //   } else {
+    //     this.logout();
+    //   }
+    // });
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+        .then(() => this.$router.push('/login'))
+        .catch((err) => Promise.reject(err));
+    },
   },
 };
 </script>

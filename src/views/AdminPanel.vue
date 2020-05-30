@@ -36,16 +36,22 @@ export default {
     sideActions,
   },
   created() {
-    this.$store.dispatch('register/getDistributions');
-    this.getDepartments();
     this.getDistributions();
+    this.getDepartments();
+    this.getCities();
   },
   methods: {
     getDepartments() {
-      this.$store.dispatch('manager/getDepartments');
+      this.$store.dispatch('manager/getDepartments')
+        .catch(() => { this.$store.dispatch('logout'); });
+    },
+    getCities() {
+      this.$store.dispatch('register/getDistributionsCities')
+        .catch(() => { this.$store.dispatch('logout'); });
     },
     getDistributions() {
-      this.$store.dispatch('register/getDistributionsCities');
+      this.$store.dispatch('register/getDistributions')
+        .catch(() => { this.$store.dispatch('logout').then(() => this.$router.push('/login')); });
     },
   },
 };

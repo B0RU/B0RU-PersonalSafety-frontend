@@ -21,7 +21,7 @@ export default {
     reg_error(state, errors) {
       state.status = 'error';
       // eslint-disable-next-line prefer-destructuring
-      state.message = errors.messages[0];
+      state.message = errors;
     },
     getCities_success(state, cities) {
       state.cities = cities;
@@ -43,7 +43,7 @@ export default {
             resolve(res);
           })
           .catch((err) => {
-            commit('reg_error', err.response.data);
+            commit('reg_error', err);
             reject(err);
           });
       });
@@ -58,7 +58,7 @@ export default {
             resolve(res);
           })
           .catch((err) => {
-            commit('reg_error', err.response.data);
+            commit('reg_error', err);
             reject(err);
           });
       });
@@ -99,7 +99,7 @@ export default {
             resolve(res);
           })
           .catch((err) => {
-            commit('reg_error', err.response.data);
+            commit('reg_error', err);
             reject(err);
           });
       });

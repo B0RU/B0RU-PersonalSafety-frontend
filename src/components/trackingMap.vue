@@ -84,13 +84,12 @@ export default {
   },
   created() {
     this.$locationHub.$on('location-changed', this.locationChanged);
-    console.log(this.$route);
   },
   mounted() {
     this.$refs.trackingMap.$mapPromise.then((map) => {
       this.map = map;
     });
-    // this.$locationHub.$on('location-changed', this.locationChanged);
+    this.$locationHub.$on('location-changed', this.locationChanged);
   },
   beforeDestroy() {
     this.$locationHub.$off('location-changed', this.locationChanged);
@@ -99,9 +98,6 @@ export default {
   computed: {
     departments() {
       return this.$store.state.manager.departments;
-    },
-    agentRescuers() {
-      return this.$store.state.personnel.rescuers;
     },
   },
   methods: {
@@ -124,7 +120,6 @@ export default {
       });
     },
     locationChanged(payload) {
-      console.log('location changed');
       this.rescuers.forEach((rescuer) => {
         if (payload.position.lat === null && payload.position.lng === null) {
           // eslint-disable-next-line no-param-reassign
@@ -134,7 +129,6 @@ export default {
           rescuer.position = payload.position;
         }
       });
-      console.log(this.rescuers);
     },
     restoreMap() {
       this.visible = true;

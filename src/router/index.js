@@ -10,6 +10,7 @@ import AdminActions from '../components/AdminActions.vue';
 import RegionalDistribution from '../components/RegionalDistribution.vue';
 import trackingMap from '../components/trackingMap.vue';
 import ManagerPanel from '../views/Manager.vue';
+import AgentPanel from '../views/AgentPanel.vue';
 import Personnel from '../views/personnel.vue';
 import RegisterRescuer from '../views/RegisterRescuer.vue';
 import ResetPassword from '../views/ResetPassword.vue';
@@ -54,7 +55,7 @@ const routes = [
       component: RegionalDistribution,
     }, {
       path: 'track-rescuers',
-      name: 'trackRescuers',
+      name: 'adminRescuers',
       component: trackingMap,
     }],
     meta: {
@@ -74,7 +75,7 @@ const routes = [
       component: Requests,
     }, {
       path: 'track-rescuers',
-      name: 'trackRescuers',
+      name: 'managerRescuers',
       component: trackingMap,
     }],
     meta: {
@@ -82,17 +83,22 @@ const routes = [
     },
   },
   {
-    path: '/personnel',
-    name: 'personnel',
-    component: Personnel,
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: '/personnel/register-rescuer',
-    name: 'RegisterRescuer',
-    component: RegisterRescuer,
+    path: '/agent',
+    name: 'agentPanel',
+    component: AgentPanel,
+    children: [{
+      path: 'dashboard',
+      name: 'agentDashboard',
+      component: Personnel,
+    }, {
+      path: 'track-rescuers',
+      name: 'agentRescuers',
+      component: trackingMap,
+    }, {
+      path: 'register-rescuer',
+      name: 'registerRescuer',
+      component: RegisterRescuer,
+    }],
     meta: {
       requiresAuth: true,
     },

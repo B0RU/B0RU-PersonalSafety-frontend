@@ -56,7 +56,7 @@ export default {
           } else if (this.user === 'Manager') {
             this.$router.push('/manager/dashboard');
           } else {
-            this.$router.push('/personnel');
+            this.$router.push('/agent/dashboard');
           }
         })
         .catch((err) => console.log(err));

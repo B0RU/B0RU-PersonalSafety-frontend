@@ -34,4 +34,7 @@ export default {
   ResetSOSRequest(requestId) {
     return axios.put(`/api/Agent/SOS/ResetSOSRequest?requestId=${requestId}`);
   },
+  GetBasicInfo() {
+    return axios.get('/api/Account/Personnel/GetBasicInfo');
+  },
 };

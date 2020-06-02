@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .managerPanel {
   display: flex;
   margin-top: 30px;

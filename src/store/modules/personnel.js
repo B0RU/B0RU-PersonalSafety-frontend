@@ -9,6 +9,7 @@ export default {
     rescuers: {},
     passwordMessages: {},
     message: '',
+    info: {},
   },
   mutations: {
     get_request(state) {
@@ -33,6 +34,9 @@ export default {
     updatePassword(state, passwordMessages) {
       state.passwordMessages = passwordMessages;
       state.status = 'success';
+    },
+    getBasicInfo(state, info) {
+      state.info = info;
     },
   },
   actions: {
@@ -64,7 +68,7 @@ export default {
           });
       });
     },
-    getResquers({ commit }) {
+    getRescuers({ commit }) {
       return new Promise((resolve, reject) => {
         commit('get_request');
         agentService.GetOnlineRescuers()
@@ -90,6 +94,21 @@ export default {
           })
           .catch((err) => {
             commit('get_error');
+            reject(err);
+          });
+      });
+    },
+    getBasicInfo({ commit }) {
+      return new Promise((resolve, reject) => {
+        commit('get_request');
+        agentService.GetBasicInfo()
+          .then((res) => {
+            const info = res.data.result;
+            commit('getBasicInfo', info);
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('get_error', err);
             reject(err);
           });
       });

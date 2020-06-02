@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       adminActions: {
-        Requests: { url: '/admin/track-rescuers', value: 'Track Rescuers' },
+        Rescuers: { url: '/admin/track-rescuers', value: 'Track Rescuers' },
         Events: { url: '/admin/events', value: 'Events' },
       },
       coreActions: {
@@ -57,7 +57,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .adminPanel {
   display: flex;
   margin-top: 30px;

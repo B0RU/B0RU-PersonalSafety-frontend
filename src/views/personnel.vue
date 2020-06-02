@@ -40,63 +40,22 @@
     </form>
     <p>{{messages}}</p>
   </b-modal>
-  <a class="float">
-    <router-link :to="{name: 'RegisterRescuer'}">
-    <b-icon-plus style="margin-bottom: 20px;"></b-icon-plus>
-    </router-link>
-</a>
 </div>
 </template>
 <script>
-const signalR = require('@aspnet/signalr');
 
 export default {
   name: 'Personnel',
   data() {
     return {
-      connection: '',
       rescuer: {
         requestId: null,
         rescuerEmail: '',
       },
     };
   },
-  created() {
-    this.getSOSRequests();
-    this.getRescuers();
-    this.connection = new signalR.HubConnectionBuilder()
-      .withUrl(`${this.$hostname}/hubs/agent`, {
-        accessTokenFactory: () => this.$store.state.authenticationDetails.token,
-      })
-      .configureLogging(signalR.LogLevel.Information)
-      .build();
 
-    this.connection.start()
-      .catch((error) => {
-        console.log(error);
-      });
-  },
-  destroyed() {
-    this.connection.stop()
-      .then(() => { console.log('WS connection Stopped'); });
-  },
-  mounted() {
-    this.connection.on('AgentRequestsChannel', () => {
-      this.getSOSRequests();
-      console.log('changes Recieved');
-    });
-    this.connection.on('AgentRescuersChannel', () => {
-      this.getRescuers();
-      console.log('rescuers Recieved');
-    });
-  },
   methods: {
-    getSOSRequests() {
-      this.$store.dispatch('personnel/getRequests');
-    },
-    getRescuers() {
-      this.$store.dispatch('personnel/getResquers');
-    },
     acceptRequest(rescuer) {
       this.$store.dispatch('personnel/acceptRequest', rescuer)
         .then(() => this.getSOSRequests());
@@ -132,22 +91,8 @@ $widthoftable: 31%;
 $bgctables: #ffffff;
 $bgfontcolor: #717787;
 
-.float{
-   position:fixed;
-    width:60px;
-    height:60px;
-    bottom:40px;
-    right:40px;
-    background-color:#343A40;
-    color:#FFF;
-    border-radius:50px;
-    text-align:center;
-    box-shadow: 2px 2px 3px #999;
-    font-size: 4rem;
-}
-
 .requestTable{
-  margin: 40px auto;
+  // margin: 40px auto;
   color: black;
   &>&-title{
     text-align: center;
@@ -186,7 +131,7 @@ $bgfontcolor: #717787;
       max-width: 320px;
       transition: all 0.3s ease;
       border-radius: 5px;
-      margin: 2rem;
+      // margin: 2rem;
 
       @media screen and (max-width: 767px){
         display: block;
@@ -234,7 +179,7 @@ $bgfontcolor: #717787;
 
       &__header{
         font-size: 1.6em;
-        padding: 40px 0px;
+        padding: 1rem 0px;
         border-bottom: 2px solid #ebedec;
         letter-spacing: 0.03em;
 

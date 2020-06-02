@@ -22,6 +22,11 @@ export default {
     connection.on('LocationChannel', (email, lat, lng) => {
       locationHub.$emit('location-changed', { rescuerEmail: email, position: { lat, lng } });
     });
+    connection.on('AlertsChannel', (payload) => {
+      locationHub.$emit('rescuers-changed', payload);
+      console.log(payload);
+    });
+
     locationHub.locationOpened = (departmentName) => connection.invoke('EnterDepartmentRoom', departmentName);
     locationHub.locationClosed = (departmentName) => connection.invoke('someGroup', departmentName);
     locationHub.start = () => {

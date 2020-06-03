@@ -116,8 +116,6 @@ export default {
       //   // eslint-disable-next-line no-param-reassign
       //   rescuer.authorityTypeName = this.$store.state.personnel.info.authorityTypeName;
       // });
-      console.log(rescuers);
-      console.log(this.rescuers);
     },
   },
   computed: {

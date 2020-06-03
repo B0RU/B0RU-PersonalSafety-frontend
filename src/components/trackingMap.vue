@@ -147,7 +147,6 @@ export default {
       });
     },
     locationChanged(payload) {
-      console.log(this.$store.getters.onlineRescuers);
       this.rescuers.forEach((rescuer) => {
         if (payload.position.lat === null && payload.position.lng === null) {
           // eslint-disable-next-line no-param-reassign

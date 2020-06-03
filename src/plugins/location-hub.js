@@ -23,7 +23,7 @@ export default {
       locationHub.$emit('location-changed', { rescuerEmail: email, position: { lat, lng } });
     });
     connection.on('AlertsChannel', (payload) => {
-      locationHub.$emit('rescuers-changed', payload);
+      locationHub.$emit('rescuers-changed');
       console.log(payload);
     });
 

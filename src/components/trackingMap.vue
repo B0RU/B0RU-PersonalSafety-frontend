@@ -83,6 +83,11 @@ export default {
     };
   },
   created() {
+    if (this.$route.name === 'agentRescuers') {
+      this.$locationHub.start().then(() => {
+        this.$locationHub.locationOpened(this.$store.state.personnel.info.departmentName);
+      });
+    }
     this.$locationHub.$on('location-changed', this.locationChanged);
   },
   mounted() {
@@ -95,14 +100,36 @@ export default {
     this.$locationHub.$off('location-changed', this.locationChanged);
     this.$locationHub.stop();
   },
+  watch: {
+    onlineRecuers(rescuers) {
+      if (rescuers.length > 0) {
+        rescuers.forEach((rescuer) => {
+          this.rescuers.push({ rescuer, position: null, authorityTypeName: this.$store.state.personnel.info.authorityTypeName });
+        });
+      } else {
+        this.rescuers = [];
+      }
+      // this.rescuers = rescuers;
+      // this.rescuers.forEach((rescuer) => {
+      //   // eslint-disable-next-line no-param-reassign
+      //   rescuer.position = null;
+      //   // eslint-disable-next-line no-param-reassign
+      //   rescuer.authorityTypeName = this.$store.state.personnel.info.authorityTypeName;
+      // });
+      console.log(rescuers);
+      console.log(this.rescuers);
+    },
+  },
   computed: {
     departments() {
       return this.$store.state.manager.departments;
     },
+    onlineRecuers() {
+      return this.$store.state.personnel.rescuers;
+    },
   },
   methods: {
     getRescuers(id, name) {
-      console.log(this.$refs);
       const { departments } = this.$store.state.manager;
       const department = departments.filter((item) => item.id === id);
       department[0].rescuersEmails.forEach((rescuer) => {
@@ -120,6 +147,7 @@ export default {
       });
     },
     locationChanged(payload) {
+      console.log(this.$store.getters.onlineRescuers);
       this.rescuers.forEach((rescuer) => {
         if (payload.position.lat === null && payload.position.lng === null) {
           // eslint-disable-next-line no-param-reassign

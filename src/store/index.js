@@ -88,7 +88,7 @@ export default new Vuex.Store({
     statusCode: (state) => state.statusCode,
     SOSRequests: (state) => state.personnel.Requests,
     passwordMessages: (state) => state.personnel.passwordMessages,
-    rescuers: (state) => state.personnel.rescuers,
+    onlineRescuers: (state) => state.personnel.rescuers,
     messages: (state) => state.register.message,
   },
   modules: {

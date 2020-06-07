@@ -1,15 +1,13 @@
 <template>
   <modal-component ref="chooseLocation">
     <template v-slot:header>
-      <h3>Track Rescuers</h3>
     </template>
     <template v-slot:body>
       <div>
         <div
-          style="max-width: 800px; color: gray; margin: 0 auto; display: flex; align-items: center; justify-content: space-between"
+          style="max-width: 800px; color: gray; margin: 0 auto; justify-content: space-between"
         >
-            <p>Drag Pin on the Department Location</p>
-            <p>{{ myCoordinates.lat }} Latitude, {{ myCoordinates.lng }} Longitude</p>
+            <h5>Drag Pin on the Department Location</h5>
         </div>
         <GmapMap ref="mapRef" :center="myCoordinates" :zoom="zoom" style="height:360px; ">
           <GmapMarker

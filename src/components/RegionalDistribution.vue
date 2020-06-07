@@ -1,9 +1,9 @@
 <template>
-  <div class="mainActions">
+  <card class="mainActions">
     <h3>Regional Distribution</h3>
     <p class="subhead">View and edit information about the geographical distribution of the system</p>
     <distribution-table></distribution-table>
-  </div>
+  </card>
 </template>
 
 <script>

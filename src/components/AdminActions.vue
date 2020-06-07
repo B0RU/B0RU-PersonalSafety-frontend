@@ -1,6 +1,6 @@
 <template>
-  <div class='mainActions'>
-    <h3>Dashboard</h3>
+  <card class='mainActions'>
+    <h3>Departments</h3>
     <p class='subhead'>Manage Entity</p>
     <b-overlay :show='status' opacity='1' variant='transparent' spinner-variant='primary'>
       <div class='departments'>
@@ -68,7 +68,7 @@
         </ul>
       </div>
     </b-overlay>
-  </div>
+  </card>
 </template>
 
 <script>
@@ -103,11 +103,10 @@ $bgfontcolor: #717787;
 .mainActions {
   display: block;
   text-align: left;
-  padding: 20px;
 }
 .departments {
-  width: 90%;
-  background-color: #293147;
+  width: 100%;
+  background-color: #212120;
   border-radius: 15px;
   margin: 0 auto;
   margin-top: 50px;
@@ -127,7 +126,7 @@ $bgfontcolor: #717787;
 
 .departmentTable {
   margin: 20px auto;
-  color: black;
+  color: #212120;
 
   &-firstTable {
     list-style: none;
@@ -196,10 +195,10 @@ $bgfontcolor: #717787;
       &__header {
         font-size: 0.8em;
         padding-top: 10px;
-        color: black;
+        color: #212120;
         text-align: left;
         &__location {
-          background-color: #293147;
+          background-color: #212120;
           border: none;
           border-radius: 5px;
           float: right;
@@ -255,7 +254,7 @@ $bgfontcolor: #717787;
         span:last-of-type {
           font-size: 0.3em;
           padding-left: 0.2em;
-          color: black;
+          color: #212120;
           @media screen and (max-width: 1068px) {
             font-size: 0.25em;
           }

@@ -10,6 +10,7 @@ export default {
     passwordMessages: {},
     message: '',
     info: {},
+    departmentDetails: {},
   },
   mutations: {
     get_request(state) {
@@ -23,6 +24,11 @@ export default {
       state.status = 'success';
       state.message = messages;
     },
+    reg_success(state, message) {
+      state.status = 'success';
+      // eslint-disable-next-line prefer-destructuring
+      state.message = message.messages[0];
+    },
     get_error(state, errors) {
       state.status = 'error';
       state.message = errors;
@@ -35,8 +41,11 @@ export default {
       state.passwordMessages = passwordMessages;
       state.status = 'success';
     },
-    getBasicInfo(state, info) {
+    getBasicInfo_success(state, info) {
       state.info = info;
+    },
+    getDepartmentDetails_success(state, details) {
+      state.departmentDetails = details;
     },
   },
   actions: {
@@ -64,6 +73,21 @@ export default {
           })
           .catch((err) => {
             commit('get_error', err);
+            reject(err);
+          });
+      });
+    },
+    registerRescuer({ commit }, rescuer) {
+      return new Promise((resolve, reject) => {
+        commit('reg_request');
+        agentService.RegisterRescuer(rescuer)
+          .then((res) => {
+            const response = res.data;
+            commit('reg_success', response);
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('reg_error', err);
             reject(err);
           });
       });
@@ -104,7 +128,22 @@ export default {
         agentService.GetBasicInfo()
           .then((res) => {
             const info = res.data.result;
-            commit('getBasicInfo', info);
+            commit('getBasicInfo_success', info);
+            resolve(res);
+          })
+          .catch((err) => {
+            commit('get_error', err);
+            reject(err);
+          });
+      });
+    },
+    getDepartmentDetails({ commit }) {
+      return new Promise((resolve, reject) => {
+        commit('get_request');
+        agentService.GetDepartmentDetails()
+          .then((res) => {
+            const details = res.data.result;
+            commit('getDepartmentDetails_success', details);
             resolve(res);
           })
           .catch((err) => {

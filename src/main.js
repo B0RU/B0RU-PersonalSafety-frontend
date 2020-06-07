@@ -9,6 +9,8 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import location from './plugins/location-hub';
+import PaperDashboard from './plugins/paperDashboard';
+import 'vue-notifyjs/themes/default.css';
 
 Vue.config.productionTip = false;
 Vue.prototype.$hostname = 'https://personalsafety.azurewebsites.net';
@@ -28,6 +30,7 @@ Vue.use(VueGoogleMaps, {
     libraries: 'places', // This is required if you use the Autocomplete plugin
   },
 });
+Vue.use(PaperDashboard);
 new Vue({
   router,
   store,

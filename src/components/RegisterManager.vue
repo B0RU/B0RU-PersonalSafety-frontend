@@ -1,5 +1,5 @@
 <template>
-  <div class="mainActions">
+  <card class="mainActions">
     <h3>Register Manager</h3>
     <p class="subhead">Enter the new Manager's Account Details</p>
     <b-container fluid class="register">
@@ -117,7 +117,7 @@
         </div>
       </template>
     </modal-component>
-  </div>
+  </card>
 </template>
 
 <script>
@@ -150,7 +150,7 @@ export default {
     };
   },
   destroyed() {
-    this.$store.state.register.message = '';
+    this.$store.state.admin.message = '';
   },
   mounted() {
     this.generatePassword();
@@ -160,17 +160,17 @@ export default {
       return this.confirm === this.form.email;
     },
     getMessages() {
-      return this.$store.state.register.message;
+      return this.$store.state.admin.message;
     },
     distributions() {
-      return this.$store.state.register.distributions;
+      return this.$store.state.admin.distributions;
     },
   },
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
       this.form.fullName = `${this.firstName} ${this.lastName}`;
-      this.$store.dispatch('register/registerManager', this.form);
+      this.$store.dispatch('admin/registerManager', this.form);
       console.log(this.form);
     },
     onReset(evt) {
@@ -222,7 +222,7 @@ export default {
   margin-top: 50px;
 }
 button {
-  background-color: #293147;
+  background-color: #212120;
   border: none;
   font-size: 0.9rem;
   &:first-of-type{
@@ -250,7 +250,7 @@ button {
   margin-top: 20px;
 }
 #password {
-  background-color: #293147;
+  background-color: #212120;
   border: none;
 }
 .btns {

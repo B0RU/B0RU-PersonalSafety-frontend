@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
-import registerModule from './modules/register';
+import adminModule from './modules/admin';
 import personnelModule from './modules/personnel';
 import managerModule from './modules/manager';
 import accountService from '../services/accountService';
@@ -89,10 +89,10 @@ export default new Vuex.Store({
     SOSRequests: (state) => state.personnel.Requests,
     passwordMessages: (state) => state.personnel.passwordMessages,
     onlineRescuers: (state) => state.personnel.rescuers,
-    messages: (state) => state.register.message,
+    messages: (state) => state.admin.message,
   },
   modules: {
-    register: registerModule,
+    admin: adminModule,
     personnel: personnelModule,
     manager: managerModule,
   },

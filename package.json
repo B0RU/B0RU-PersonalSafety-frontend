@@ -10,13 +10,18 @@
   "dependencies": {
     "@aspnet/signalr": "^1.1.4",
     "axios": "^0.19.2",
+    "babel-helper-vue-jsx-merge-props": "^2.0.3",
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.13.0",
+    "chartist": "^0.11.4",
     "core-js": "^3.6.4",
+    "es6-promise": "^4.2.8",
     "sass": "^1.26.2",
     "sass-loader": "^8.0.2",
     "vue": "^2.6.11",
     "vue-browser-geolocation": "^1.8.0",
+    "vue-clickaway": "^2.2.2",
+    "vue-notifyjs": "^0.4.3",
     "vue-router": "^3.1.5",
     "vue2-google-maps": "^0.10.7",
     "vuex": "^3.1.2"

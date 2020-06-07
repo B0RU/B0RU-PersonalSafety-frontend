@@ -73,7 +73,7 @@ $bgfontcolor: #717787;
 }
 .requests {
   width: 90%;
-  background-color: #293147;
+  background-color: #212120;
   border-radius: 15px;
   margin: 0 auto;
   margin-top: 50px;
@@ -96,7 +96,7 @@ $bgfontcolor: #717787;
 
 .requestTable {
   margin: 20px auto;
-  color: black;
+  color: #212120;
 
   &-firstTable {
     list-style: none;
@@ -165,10 +165,10 @@ $bgfontcolor: #717787;
       &__header {
         font-size: 0.8em;
         padding-top: 10px;
-        color: black;
+        color: #212120;
         text-align: left;
         &__location{
-            background-color: #293147;
+            background-color: #212120;
             border: none;
             border-radius: 5px;
             float: right;
@@ -225,7 +225,7 @@ $bgfontcolor: #717787;
         span:last-of-type {
           font-size: 0.3em;
           padding-left: 0.2em;
-          color: black;
+          color: #212120;
           @media screen and (max-width: 1068px) {
             font-size: 0.25em;
           }

@@ -1,33 +1,16 @@
 <template>
   <div id="app">
-    <div class="nav">
-     <router-link :to="{name: 'Home'}"> <div class="logo">Personal Safety</div> </router-link>
-     <signing-box></signing-box>
-     </div>
-    <router-view/>
+    <div :class="{'nav-open': $sidebar.showSidebar}">
+    <notifications></notifications>
+    <router-view></router-view>
+  </div>
   </div>
 </template>
 
 <script>
-// import Axios from 'axios';
-import signingBox from './components/signingBox.vue';
 
 export default {
   name: 'App',
-  components: {
-    signingBox,
-  },
-  created() {
-    // Axios.interceptors.response.use((response) => {
-    //   console.log(response);
-    // }, (error) => {
-    //   if (error.message === 'Request failed with status code 400') {
-    //     Promise.reject(error);
-    //   } else {
-    //     this.logout();
-    //   }
-    // });
-  },
   methods: {
     logout() {
       this.$store.dispatch('logout')
@@ -39,32 +22,6 @@ export default {
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: white;
-  height: 100%;
-}
-.nav{
-  width: 100%;
-  display: inline-block;
-  background-color: #5e657a;
-}
-.logo{
-  font-family: 'Berlin Sans FB Regular';
-  font-size: 2rem;
-  float: left;
-  color: white;
-  padding-left: 15px;
-  @media screen and (max-width: 320px) {
-    font-size: 1rem;
-  }
-  @media screen and (max-width: 496px) {
-    font-size: 1rem;
-  }
-}
 .btn-secondary.dropdown-toggle{
     background: none;
     border: none;
@@ -77,27 +34,31 @@ export default {
   width: 30%;
   margin: 0 auto;
 }
-body {
-  background-color: #293147;
-  font-size: 16px;
-  font-family: 'Lato', sans-serif;
-  font-weight: 300;
-  margin: 0;
-  color: #666;
-  height: 100%;
-  padding: 0px;
+.vue-notifyjs.notifications {
+  .alert {
+    z-index: 10000;
+  }
+  .list-move {
+    transition: transform 0.3s, opacity 0.4s;
+  }
+  .list-item {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .list-enter-active {
+    transition: transform 0.2s ease-in, opacity 0.4s ease-in;
+  }
+  .list-leave-active {
+    transition: transform 1s ease-out, opacity 0.4s ease-out;
+  }
 
-    @media screen and (max-width: 960px){
-     font-size: 80%;
-   }
-     @media screen and (max-width: 776px){
-     font-size: 70%;
-   }
-     @media screen and (max-width: 496px){
-     font-size: 50%;
-   }
-     @media screen and (max-width: 320px){
-     font-size: 40%;
-   }
+  .list-enter {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+  .list-leave-to {
+    opacity: 0;
+    transform: scale(1.2, 0.7);
+  }
 }
 </style>

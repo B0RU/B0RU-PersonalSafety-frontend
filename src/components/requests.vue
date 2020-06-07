@@ -1,11 +1,11 @@
 <template>
-  <div class="mainActions">
+  <card class="mainActions">
     <h3>Monitor Requests</h3>
     <p class="subhead">You can Monitor Department Requests</p>
     <b-overlay :show="status" opacity="1" variant="transparent" spinner-variant="primary">
     <requests-component :aria-hidden="show ? 'true' : null"></requests-component>
     </b-overlay>
-  </div>
+  </card>
 </template>
 
 <script>

@@ -88,43 +88,43 @@ export default {
   },
   computed: {
     distributions() {
-      return this.$store.state.register.distributions;
+      return this.$store.state.admin.distributions;
     },
     status() {
-      return this.$store.state.register.status === 'loading';
+      return this.$store.state.admin.status === 'loading';
     },
     messages() {
-      return this.$store.state.register.message;
+      return this.$store.state.admin.message;
     },
   },
   destroyed() {
-    this.$store.state.register.message = '';
+    this.$store.state.admin.message = '';
   },
   methods: {
     getchildren(id) {
-      const { distributions } = this.$store.state.register;
+      const { distributions } = this.$store.state.admin;
       const childs = distributions.filter((item) => item.parentId === id);
       this.items = childs;
     },
     renameDistribution() {
-      this.$store.dispatch('register/renameDistribution', this.renamedDistribution)
+      this.$store.dispatch('admin/renameDistribution', this.renamedDistribution)
         .then(() => { this.getchildren(null); });
     },
     renameModal(id) {
       this.renamedDistribution.id = id;
       this.renamedDistribution.value = '';
-      this.$store.state.register.message = '';
+      this.$store.state.admin.message = '';
       this.$refs.renameDistribution.openModal();
     },
     addDistribution() {
-      this.$store.dispatch('register/addDistribution', this.addedDistribution);
+      this.$store.dispatch('admin/addDistribution', this.addedDistribution);
       console.log(this.addedDistribution);
     },
     addModal(id, parentValue) {
       this.addedDistribution.parentId = id;
       this.parentValue = parentValue;
       this.addedDistribution.value = '';
-      this.$store.state.register.message = '';
+      this.$store.state.admin.message = '';
       this.$refs.addDistribution.openModal();
     },
   },

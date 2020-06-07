@@ -1,5 +1,5 @@
 <template>
-  <div class="mainActions" ref="main">
+  <card class="mainActions" ref="main">
     <h3>Register Agent</h3>
     <p class="subhead">Enter the new Agent's Account Details</p>
     <b-container fluid class="register">
@@ -165,7 +165,7 @@
         </div>
       </template>
     </modal-component>
-  </div>
+  </card>
 </template>
 
 <script>
@@ -221,10 +221,10 @@ export default {
       return this.confirm === this.form.email;
     },
     getMessages() {
-      return this.$store.state.register.message;
+      return this.$store.state.admin.message;
     },
     cities() {
-      return this.$store.state.register.cities;
+      return this.$store.state.admin.cities;
     },
     departments() {
       return this.$store.state.manager.departments;
@@ -234,7 +234,7 @@ export default {
     },
   },
   destroyed() {
-    this.$store.state.register.message = '';
+    this.$store.state.admin.message = '';
   },
   watch: {
     departmentLocation(location) {
@@ -253,7 +253,7 @@ export default {
     onSubmit(evt) {
       evt.preventDefault();
       this.form.fullName = `${this.firstName} ${this.lastName}`;
-      this.$store.dispatch('register/registerPersonnel', this.form);
+      this.$store.dispatch('admin/registerPersonnel', this.form);
     },
     onReset(evt) {
       evt.preventDefault();
@@ -312,7 +312,7 @@ export default {
   margin-top: 50px;
 }
 button {
-  background-color: #293147;
+  background-color: #212120;
   border: none;
   font-size: 0.9rem;
   &:first-of-type{
@@ -364,7 +364,7 @@ button {
   margin-top: 20px;
 }
 #password {
-  background-color: #293147;
+  background-color: #212120;
   border: none;
 }
 .btns {

@@ -10,7 +10,6 @@ import router from './router';
 import store from './store';
 import location from './plugins/location-hub';
 import PaperDashboard from './plugins/paperDashboard';
-import 'vue-notifyjs/themes/default.css';
 
 Vue.config.productionTip = false;
 Vue.prototype.$hostname = 'https://personalsafety.azurewebsites.net';

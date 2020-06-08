@@ -8,6 +8,7 @@ import location from './location-hub';
 import 'es6-promise/auto';
 
 // css assets
+import 'vue-notifyjs/themes/default.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import '../assets/sass/paper-dashboard.scss';
 import '../assets/css/themify-icons.css';

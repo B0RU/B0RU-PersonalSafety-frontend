@@ -49,7 +49,15 @@ export default {
     this.$store.dispatch(
       'manager/getDepartmentRequests',
       this.$route.params.id,
-    );
+    ).catch(() => {
+      this.$notify({
+        message: 'Somthing Went Wrong. Please Try again',
+        icon: 'ti-error',
+        horizontalAlign: 'right',
+        verticalAlign: 'top',
+        type: 'danger',
+      });
+    });
   },
   computed: {
     getRequests() {

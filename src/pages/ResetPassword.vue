@@ -58,7 +58,15 @@ export default {
           if (this.$store.state.personnel.passwordMessages[0] === 'Success! Password was changed successfully.') {
             this.$store.dispatch('logout')
               .then(() => this.$router.push('/login'))
-              .catch((err) => console.log(err));
+              .catch(() => {
+                this.$notify({
+                  message: 'Somthing Went Wrong. Please Try again',
+                  icon: 'ti-error',
+                  horizontalAlign: 'right',
+                  verticalAlign: 'top',
+                  type: 'danger',
+                });
+              });
           }
         });
     },

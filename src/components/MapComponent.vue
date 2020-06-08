@@ -53,7 +53,15 @@ export default {
       .then((coordinates) => {
         this.myCoordinates = coordinates;
       })
-      .catch((error) => console.log(error));
+      .catch(() => {
+        this.$notify({
+          message: 'Somthing Went Wrong. Please Try again',
+          icon: 'ti-error',
+          horizontalAlign: 'right',
+          verticalAlign: 'top',
+          type: 'danger',
+        });
+      });
   },
   mounted() {
     this.$refs.chooseLocation.openModal().then(() => {

@@ -63,6 +63,10 @@ export default {
     };
   },
   created() {
+    this.$notify({
+      message: 'Welcome',
+      type: 'success',
+    });
     if (this.$route.matched[0].path === '/admin' || this.$route.matched[0].path === '/manager') {
       if (this.$route.matched[0].path === '/admin') {
         this.getDistributions();
@@ -85,8 +89,14 @@ export default {
         .build();
 
       this.connection.start()
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
+          this.$notify({
+            message: 'Somthing Went Wrong when trying to start Realtime Connection. Please Try again',
+            icon: 'ti-error',
+            horizontalAlign: 'right',
+            verticalAlign: 'top',
+            type: 'danger',
+          });
         });
     }
   },
@@ -104,7 +114,12 @@ export default {
       });
       this.connection.on('AgentRescuersChannel', () => {
         this.getRescuers();
-        console.log('rescuers Recieved');
+        this.$notify({
+          message: 'new Rescuer is Online ',
+          horizontalAlign: 'right',
+          verticalAlign: 'top',
+          type: 'success',
+        });
       });
     }
   },
@@ -152,7 +167,15 @@ export default {
     logout() {
       this.$store.dispatch('logout')
         .then(() => this.$router.push('/login'))
-        .catch((err) => console.log(err));
+        .catch(() => {
+          this.$notify({
+            message: 'Somthing Went Wrong. Please Try again',
+            icon: 'ti-error',
+            horizontalAlign: 'right',
+            verticalAlign: 'top',
+            type: 'danger',
+          });
+        });
     },
   },
 };

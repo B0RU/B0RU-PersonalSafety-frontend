@@ -59,7 +59,15 @@ export default {
             this.$router.push('/agent/dashboard');
           }
         })
-        .catch((err) => console.log(err));
+        .catch(() => {
+          this.$notify({
+            message: 'Somthing Went Wrong. Please Try again',
+            icon: 'ti-error',
+            horizontalAlign: 'right',
+            verticalAlign: 'top',
+            type: 'danger',
+          });
+        });
     },
   },
 };

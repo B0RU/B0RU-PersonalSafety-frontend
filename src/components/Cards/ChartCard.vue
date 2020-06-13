@@ -1,5 +1,7 @@
 <template>
   <card>
+      <b-overlay :show="status" opacity="1" variant="transparent" spinner-variant="primary">
+
     <template slot="header">
       <h4 v-if="$slots.title || title" class="card-title">
         <slot name="title">
@@ -26,7 +28,7 @@
         </div>
       </div>
     </div>
-
+      </b-overlay>
   </card>
 </template>
 <script>
@@ -103,6 +105,11 @@ export default {
         this.initChart(ChartistLib);
       });
     });
+  },
+  computed: {
+    status() {
+      return this.$store.state.manager.status === 'loading';
+    },
   },
 };
 </script>

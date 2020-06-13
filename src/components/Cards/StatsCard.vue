@@ -1,5 +1,7 @@
 <template>
   <card>
+      <b-overlay :show="status" opacity="1" variant="transparent" spinner-variant="primary">
+
     <div>
       <div class="row">
         <div class="col-5" v-if="$slots.header">
@@ -14,7 +16,7 @@
         <slot name="footer"></slot>
       </div>
     </div>
-
+      </b-overlay>
   </card>
 </template>
 <script>
@@ -24,6 +26,11 @@ export default {
   name: 'stats-card',
   components: {
     Card,
+  },
+  computed: {
+    status() {
+      return this.$store.state.manager.status === 'loading';
+    },
   },
 };
 </script>

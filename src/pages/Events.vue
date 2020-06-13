@@ -1,4 +1,6 @@
 <template>
+      <b-overlay :show="status" opacity="1" variant="transparent" spinner-variant="primary">
+
   <div>
 
     <!--event cards-->
@@ -57,6 +59,7 @@
     </div>
 
   </div>
+      </b-overlay>
 </template>
 <script>
 // import Chartist from 'chartist';
@@ -72,6 +75,9 @@ export default {
   computed: {
     events() {
       return this.$store.state.manager.events;
+    },
+    status() {
+      return this.$store.state.manager.status === 'loading';
     },
   },
 

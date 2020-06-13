@@ -73,9 +73,9 @@ export default {
         this.getCities();
       }
       this.getDepartments();
-      this.getTopCardsData();
-      this.getSOSPieData();
-      this.getSOSChartData();
+      // this.getTopCardsData();
+      // this.getSOSPieData();
+      // this.getSOSChartData();
     } else if (this.$route.matched[0].path === '/agent') {
       this.getDepartmentDetails();
       this.getBasicInfo();
@@ -137,15 +137,15 @@ export default {
       this.$store.dispatch('admin/getDistributions')
         .catch(() => { this.$store.dispatch('logout').then(() => this.$router.push('/login')); });
     },
-    getTopCardsData() {
-      this.$store.dispatch('manager/getTopCardsData');
-    },
-    getSOSPieData() {
-      this.$store.dispatch('manager/getSOSPieData');
-    },
-    getSOSChartData() {
-      this.$store.dispatch('manager/getSOSChartData');
-    },
+    // getTopCardsData() {
+    //   this.$store.dispatch('manager/getTopCardsData');
+    // },
+    // getSOSPieData() {
+    //   this.$store.dispatch('manager/getSOSPieData');
+    // },
+    // getSOSChartData() {
+    //   this.$store.dispatch('manager/getSOSChartData');
+    // },
     // agent Methods
     getDepartmentDetails() {
       this.$store.dispatch('personnel/getDepartmentDetails');

@@ -160,6 +160,22 @@ export default {
   created() {
     this.preferencesChart.data.series = this.requests;
     // this.activityChart.data.series = this.totalRequests;
+    if (this.$route.matched[0].path === '/admin' || this.$route.matched[0].path === '/manager') {
+      this.getTopCardsData();
+      this.getSOSPieData();
+      this.getSOSChartData();
+    }
+  },
+  methods: {
+    getTopCardsData() {
+      this.$store.dispatch('manager/getTopCardsData');
+    },
+    getSOSPieData() {
+      this.$store.dispatch('manager/getSOSPieData');
+    },
+    getSOSChartData() {
+      this.$store.dispatch('manager/getSOSChartData');
+    },
   },
 };
 </script>

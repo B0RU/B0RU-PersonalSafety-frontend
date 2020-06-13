@@ -1,5 +1,6 @@
 <template>
-  <card class="mainActions" ref="main">
+<div ref="mainActions">
+  <card class="mainActions">
     <h3>Register Agent</h3>
     <p class="subhead">Enter the new Agent's Account Details</p>
     <b-container fluid class="register">
@@ -166,6 +167,7 @@
       </template>
     </modal-component>
   </card>
+</div>
 </template>
 
 <script>
@@ -248,7 +250,8 @@ export default {
       const ComponentClass = Vue.extend(mapComponent);
       const instance = new ComponentClass({ store });
       instance.$mount();
-      this.$refs.main.appendChild(instance.$el);
+      console.log(this.$refs.mainActions);
+      this.$refs.mainActions.appendChild(instance.$el);
     },
     onSubmit(evt) {
       evt.preventDefault();

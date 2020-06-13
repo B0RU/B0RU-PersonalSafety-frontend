@@ -250,7 +250,6 @@ export default {
       const ComponentClass = Vue.extend(mapComponent);
       const instance = new ComponentClass({ store });
       instance.$mount();
-      console.log(this.$refs.mainActions);
       this.$refs.mainActions.appendChild(instance.$el);
     },
     onSubmit(evt) {

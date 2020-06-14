@@ -1,4 +1,5 @@
 <template>
+<div class="login-page">
   <div class="container">
     <!-- <div class="top">
       <h1 id="title" class="hidden"><span id="logo">Personal <span>Safety</span></span></h1>
@@ -17,12 +18,15 @@
       <br/>
       <input required v-model="form.password" type="password" id="password">
       <br/>
+      <b-overlay :show='status' opacity='0.8' variant='transparent' spinner-variant='primary'>
       <button type="submit">Sign In</button>
+      </b-overlay>
       <br/>
       </form>
       <!-- <a href="#"><p class="small">Forgot your password?</p></a> -->
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -42,6 +46,9 @@ export default {
     },
     authError() {
       return this.$store.state.messages;
+    },
+    status() {
+      return this.$store.state.status === 'loading';
     },
   },
   methods: {
@@ -75,6 +82,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.login-page{
+  background-image: url('../assets/img/sos.jpeg');
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+.container{
+  opacity: 0.9;
+}
 .logIn-Out{
   display:none;
 }
@@ -157,7 +174,7 @@ p.small {
 }
 
 .login-box .box-header {
-  background-color: #48C4C4;
+  background-color: #1C322F;
   margin-top: 0;
   border-radius: 5px 5px 0 0;
 }
@@ -197,7 +214,7 @@ p.small {
   font-weight: 400;
   font-size: 0.7em;
   letter-spacing: 1px;
-  background-color: #48C4C4;
+  background-color: #1C322F;
   cursor:pointer;
   outline: none;
 }

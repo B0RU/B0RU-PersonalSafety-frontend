@@ -12,9 +12,9 @@
             <p>{{stats.title}}</p>
             {{stats.value}}
           </div>
-          <!-- <div class="stats" slot="footer">
+          <div class="stats" slot="footer" @click="getTopCardsData">
             <i :class="stats.footerIcon"></i> {{stats.footerText}}
-          </div> -->
+          </div>
         </stats-card>
       </div>
     </div>
@@ -26,8 +26,8 @@
         <chart-card title="Requests"
                     :chart-data="preferencesChart.data"
                     chart-type="Pie">
-          <!-- <span slot="footer">
-            <i class="ti-timer"></i> Campaign set 2 days ago</span> -->
+          <span slot="footer" @click="getSOSPieData">
+            <i class="ti-reload"></i> Update Now</span>
           <div slot="legend">
             Total Requests : {{totalRequests}}
           </div>
@@ -39,8 +39,8 @@
                     sub-title="All Requests We Handled"
                     :chart-data="activityChart.data"
                     :chart-options="activityChart.options">
-          <span slot="footer">
-            <i class="ti-check"></i> Data information certified
+          <span slot="footer" @click="getSOSChartData">
+            <i class="ti-reload"></i> Update Now
           </span>
           <div slot="legend">
              Total Requests : {{totalRequests}}
@@ -80,16 +80,16 @@ export default {
           icon: 'ti-wallet',
           title: 'Agents',
           value: this.$store.state.manager.topCardsData.agentsNumber,
-          footerText: 'Last day',
-          footerIcon: 'ti-calendar',
+          footerText: 'Updated now',
+          footerIcon: 'ti-reload',
         },
         {
           type: 'danger',
           icon: 'ti-pulse',
           title: 'Users',
           value: this.$store.state.manager.topCardsData.usersNumber,
-          footerText: 'In the last hour',
-          footerIcon: 'ti-timer',
+          footerText: 'Updated now',
+          footerIcon: 'ti-reload',
         },
         {
           type: 'info',

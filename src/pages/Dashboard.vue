@@ -12,9 +12,9 @@
             <p>{{stats.title}}</p>
             {{stats.value}}
           </div>
-          <div class="stats" slot="footer">
+          <!-- <div class="stats" slot="footer">
             <i :class="stats.footerIcon"></i> {{stats.footerText}}
-          </div>
+          </div> -->
         </stats-card>
       </div>
     </div>

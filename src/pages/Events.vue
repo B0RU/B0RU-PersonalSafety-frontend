@@ -38,17 +38,27 @@
         </div>
       </div>
       <hr>
-      <div class="text-center" >
-         <img v-if="event.isValidated"
+        <div class="text-center" >
+         <!-- <img v-if="event.isValidated"
          src="../assets/img/criss-cross.png"
          v-b-tooltip.hover title="Invalidate Event"
          @click="invalidateEvent(event.id)"
+         > -->
+         <div v-if="event.isValidated" class="validate-event"
+         @click="invalidateEvent(event.id)"
          >
-         <img v-else
+         <span>Invalidate Event</span>
+         </div>
+         <div v-else class="validate-event"
+         @click="validateEvent(event.id)"
+         >
+          <span>Validate Event</span>
+         </div>
+         <!-- <img v-else
          src="../assets/img/stamp.png"
          v-b-tooltip.hover title="Validate Event"
          @click="validateEvent(event.id)"
-         >
+         > -->
         </div>
     </div>
   </card>
@@ -108,5 +118,14 @@ export default {
   },
 };
 </script>
-<style>
+<style lang='scss' scoped>
+.validate-event {
+  background-color: #16B68F;
+  cursor: pointer;
+  color: white;
+  border-radius: 3px;
+  line-height: 2.5;
+  font-size: 1rem;
+  font-weight: bold;
+}
 </style>

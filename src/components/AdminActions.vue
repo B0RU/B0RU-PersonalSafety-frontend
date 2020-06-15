@@ -12,8 +12,6 @@
           >
             <h1 class='departmentTable-firstTable_table__header'>
               {{ department.distributionName }}
-              <br />
-              {{ department.authorityTypeName }}
               <button
                 class='departmentTable-firstTable_table__header__location'
               >
@@ -38,6 +36,8 @@
                   </svg>
                 </a>
               </button>
+              <br />
+              {{ department.authorityTypeName }}
             </h1>
             <ul class='departmentTable-firstTable_table__department'>
               <li>
@@ -54,12 +54,12 @@
             <div
               class='departmentTable-firstTable_table__getstart'
               v-b-popover.hover.right='`${department.agentsEmails}`'
-              title='Agents'
+              :title="department.agentsEmails.length === 0 ? 'NO Agents Assigned to this department' : 'Agents'"
             >View Agents</div>
             <div
               class='departmentTable-firstTable_table__getstart'
               v-b-popover.hover.right='`${department.rescuersEmails}`'
-              title='Rescuers'
+              :title="department.rescuersEmails.length === 0 ? 'No Rescuers in this this department' : 'Rescuers'"
             >View Rescuers</div>
             <router-link :to='`requests/${department.id}`'>
               <div class='departmentTable-firstTable_table__getstart'>Requests</div>
@@ -106,11 +106,12 @@ $bgfontcolor: #717787;
 }
 .departments {
   width: 100%;
-  background-color: #212120;
+  // background-color: #212120;
   border-radius: 15px;
   margin: 0 auto;
   margin-top: 50px;
   overflow-x: auto;
+  line-height: 2.3;
   white-space: nowrap;
   &::-webkit-scrollbar {
     display: none;
@@ -146,7 +147,8 @@ $bgfontcolor: #717787;
       max-width: 320px;
       transition: all 0.3s ease;
       border-radius: 5px;
-      margin: 2rem;
+      margin: 1rem;
+      box-shadow: 0px 2px 11px 1px #888888;
 
       @media screen and (max-width: 767px) {
         display: block;
@@ -193,16 +195,19 @@ $bgfontcolor: #717787;
       }
 
       &__header {
-        font-size: 0.8em;
-        padding-top: 10px;
+        font-size: 1em;
+        // padding-top: 10px;
         color: #212120;
         text-align: left;
+        font-weight: 600;
         &__location {
           background-color: #212120;
           border: none;
           border-radius: 5px;
           float: right;
           color: white;
+          width: 2rem;
+          height: 2rem;
           a:link {
             color: white;
           }

@@ -22,28 +22,42 @@
       <div
       class="requestTable-firstTable_table__getstart"
       v-if="request.requestStateName === 'Pending'"
-      @click="rescuer.requestId = request.requestId"
-      v-b-modal.assign-Agent>
+      @click="rescuer.requestId = request.requestId; $refs.selectRescuer.openModal()"
+      >
       Accept
       </div>
     </li>
   </ul>
-  <b-modal id="assign-Agent" title="Choose Agent" @ok="handleOk">
-    <p v-if="Rescuers.length === 0">Sorry, We can't find any online Agent</p>
-    <form @submit.stop.prevent="handleSubmit" v-else>
-    <b-form-select v-model="rescuer.rescuerEmail" class="mb-3">
-      <b-form-select-option v-for="rescuer in Rescuers" :key="rescuer.userId"
-      :value="`${rescuer.userEmail}`">{{rescuer.userEmail}}</b-form-select-option>
-    </b-form-select>
-    </form>
-    <p>{{messages}}</p>
-  </b-modal>
+  <modal-component ref="selectRescuer">
+      <template v-slot:header>
+        <h3 class="modal-name">Assign Rescuer to Request</h3>
+      </template>
+      <template v-slot:body>
+        <label class="label">Rescuer:</label>
+        <b-dropdown class="modal-dropdown" v-model="rescuer.rescuerEmail" :text="rescuer.rescuerEmail">
+          <b-dropdown-item v-for="Rescuer in Rescuers"
+          :key="Rescuer.userId"
+          @click="rescuer.rescuerEmail = Rescuer.userEmail"
+          >
+          {{Rescuer.userEmail}}
+          </b-dropdown-item>
+        </b-dropdown>
+      </template>
+      <template v-slot:footer>
+        <div @click="handleOk">
+        <new-button  action="confirm" class="modalbtn"></new-button>
+        </div>
+      </template>
+    </modal-component>
 </div>
 </template>
 <script>
+import modalComponent from './modalComponent.vue';
+import newButton from './newButton.vue';
 
 export default {
   name: 'Personnel',
+  components: { modalComponent, newButton },
   data() {
     return {
       rescuer: {
@@ -87,6 +101,18 @@ $h3color: #b4bdc6;
 $widthoftable: 31%;
 $bgctables: #ffffff;
 $bgfontcolor: #717787;
+
+.modal-name{
+  margin: 0 auto;
+  color: gray;
+}
+.modalbtn{
+    background: #FF6584;
+    width: 20%;
+    margin: 0 auto;
+    height: 2rem;
+    line-height: 10px;
+}
 
 .requestTable{
   // margin: 40px auto;

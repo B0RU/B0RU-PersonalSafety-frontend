@@ -116,7 +116,7 @@ export default {
             'Nov',
             'Dec',
           ],
-          series: [[0, 0, 0, 0, 0, this.$store.state.manager.SOSPieData.totalRequests, 0, 0, 0, 0, 0, 0]],
+          series: [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]],
         },
         options: {
           seriesBarDistance: 10,
@@ -157,13 +157,14 @@ export default {
     //   this.activityChart.data.series = this.totalRequests;
     // },
   },
-  created() {
+  async created() {
     this.preferencesChart.data.series = this.requests;
     // this.activityChart.data.series = this.totalRequests;
     if (this.$route.matched[0].path === '/admin' || this.$route.matched[0].path === '/manager') {
-      this.getTopCardsData();
-      this.getSOSPieData();
-      this.getSOSChartData();
+      await this.getTopCardsData();
+      await this.getSOSPieData();
+      await this.getSOSChartData();
+      this.getRequestsForMonth();
     }
   },
   methods: {
@@ -175,6 +176,19 @@ export default {
     },
     getSOSChartData() {
       this.$store.dispatch('manager/getSOSChartData');
+    },
+    getRequestsForMonth() {
+      const { SOSChartData } = this.$store.state.manager;
+      // eslint-disable-next-line no-restricted-syntax
+      SOSChartData.forEach((data) => {
+        const monthArrayIndex = this.getMonthArrayIndex(data.monthYear);
+        this.activityChart.data.series[0][monthArrayIndex] = data.totalRequests;
+      });
+    },
+    getMonthArrayIndex(monthJSON) {
+      const month = new Date(monthJSON);
+      const monthArrayIndex = month.getMonth();
+      return monthArrayIndex;
     },
   },
 };

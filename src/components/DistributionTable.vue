@@ -1,6 +1,6 @@
 <template>
-  <div>
-      <b-table :fields="fields" :items="items">
+  <div :key="componentKey">
+      <b-table :fields="fields" :items="items" v-if='items.length !== 0'>
           <template v-slot:cell(Name)="data">
               <h5 @click="getchildren(data.item.id)" class="district">{{ data.item.value }} </h5>
           </template>
@@ -12,6 +12,11 @@
               <b-button class="table-btns" @click="renameModal(data.item.id)"><b-icon-pencil></b-icon-pencil></b-button>
           </template>
       </b-table>
+        <template v-else>
+              <h3> Empty Node!! <span @click="rerenderComponent()"
+              style="color: blue; cursor: pointer">Go back!!</span>
+              </h3>
+        </template>
       <modal-component ref="renameDistribution">
       <template v-slot:header>
         <h3 class="modal-name">Rename Distribution</h3>
@@ -64,6 +69,7 @@ export default {
   },
   data() {
     return {
+      componentKey: 0,
       show: false,
       fields: ['Name', 'Type', { key: 'btns', label: ' ' }],
       items: [
@@ -101,6 +107,9 @@ export default {
     this.$store.state.admin.message = '';
   },
   methods: {
+    rerenderComponent() {
+      this.getchildren(null);
+    },
     getchildren(id) {
       const { distributions } = this.$store.state.admin;
       const childs = distributions.filter((item) => item.parentId === id);
